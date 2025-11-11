@@ -1,127 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SirPaul Entertainment Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SirPaul Entertainment</title>
+
+  <!-- Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
 </head>
 <body>
+  <!-- INTRO (full-screen) -->
+  <div id="intro" aria-hidden="true">
+    <div class="intro-inner">
+      <div class="blob red"></div>
+      <div class="blob blue"></div>
 
-  <!-- CONTENT CREATOR -->
-  <section id="content-creator" class="section fade-in">
-    <h2>Content Creator</h2>
-    <p class="section-subtext">I turn ideas into visuals that connect, inspire, and sell.</p>
-
-    <div class="categories">
-      <div class="category fade-in">
-        <h3>UGC & Ads</h3>
-        <p>Authentic, high-converting videos that feel real — not forced.</p>
-        <div class="video-grid">
-          <video controls poster="content-creator/ugc1.jpg">
-            <source src="content-creator/ugc1.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <div class="category fade-in">
-        <h3>Creative</h3>
-        <p>Artistic, bold, and emotion-driven — turning ordinary moments into art.</p>
-        <div class="video-grid">
-          <video controls poster="content-creator/creative1.jpg">
-            <source src="content-creator/creative1.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <div class="category fade-in">
-        <h3>Cinematic</h3>
-        <p>From mood to motion — cinematic edits that speak louder than words.</p>
-        <div class="video-grid">
-          <video controls poster="content-creator/cinematic1.jpg">
-            <source src="content-creator/cinematic1.mp4" type="video/mp4">
-          </video>
-        </div>
+      <div class="logo-wrap">
+        <h1 class="logo-text">SirPaul</h1>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- VIDEO EDITOR -->
-  <section id="video-editor" class="section fade-in">
-    <h2>Video Editor</h2>
-    <p class="section-subtext">Every frame matters. I turn raw footage into visuals that hit hard and stay remembered.</p>
+  <!-- MAIN SITE -->
+  <div id="site" class="hidden">
+    <div class="animated-bg"></div>
 
-    <div class="categories">
-      <div class="category fade-in">
-        <h3>Social Media Edits</h3>
-        <p>High-energy, scroll-stopping videos for creators, influencers, and brands.</p>
-        <div class="video-grid">
-          <video controls poster="video-editor/social1.jpg">
-            <source src="video-editor/social1.mp4" type="video/mp4">
-          </video>
-        </div>
+    <header class="hero glass">
+      <div class="hero-inner">
+        <h1 class="brand">SirPaul Entertainment</h1>
+        <p class="tag">Creating stories through visuals — from content to cinema.</p>
       </div>
+    </header>
 
-      <div class="category fade-in">
-        <h3>Brand & Commercial Edits</h3>
-        <p>Professional edits designed to sell and build trust.</p>
-        <div class="video-grid">
-          <video controls poster="video-editor/brand1.jpg">
-            <source src="video-editor/brand1.mp4" type="video/mp4">
-          </video>
+    <main>
+      <!-- Content Creator -->
+      <section id="content-creator" class="panel glass">
+        <h2>Content Creator</h2>
+        <p class="section-subtext">I craft engaging, brand-focused content — from UGC to cinematic visuals.</p>
+
+        <div class="video-category">
+          <h3>UGC & Ads</h3>
+          <p>Authentic, performance-driven content that sells without shouting.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="content-creator/ugc1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="content-creator/ugc2.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="content-creator/ugc3.mp4" type="video/mp4"></video>
+          </div>
         </div>
-      </div>
 
-      <div class="category fade-in">
-        <h3>Cinematic Cuts</h3>
-        <p>Emotional storytelling through color, sound, and motion.</p>
-        <div class="video-grid">
-          <video controls poster="video-editor/cinematic1.jpg">
-            <source src="video-editor/cinematic1.mp4" type="video/mp4">
-          </video>
+        <div class="video-category">
+          <h3>Creative</h3>
+          <p>Unique, imaginative visuals that blend art and storytelling.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="content-creator/creative1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="content-creator/creative2.mp4" type="video/mp4"></video>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- SOCIAL MEDIA MANAGER -->
-  <section id="social-media-manager" class="section fade-in">
-    <h2>Social Media Manager</h2>
-    <p class="section-subtext">I turn content into connection — strategy, creativity, and growth in one flow.</p>
-
-    <div class="categories">
-      <div class="category fade-in">
-        <h3>Strategy & Growth</h3>
-        <p>From zero to growth — I plan strategies that attract, engage, and convert.</p>
-        <div class="video-grid">
-          <video controls poster="social-media-manager/strategy1.jpg">
-            <source src="social-media-manager/strategy1.mp4" type="video/mp4">
-          </video>
+        <div class="video-category">
+          <h3>Cinematic</h3>
+          <p>Visually rich, emotional content made to inspire and connect.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="content-creator/cinematic1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="content-creator/cinematic2.mp4" type="video/mp4"></video>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="category fade-in">
-        <h3>Content Planning & Management</h3>
-        <p>Consistent, aesthetic, and on-brand — every post has a purpose.</p>
-        <div class="video-grid">
-          <video controls poster="social-media-manager/planning1.jpg">
-            <source src="social-media-manager/planning1.mp4" type="video/mp4">
-          </video>
+      <!-- Video Editor -->
+      <section id="video-editor" class="panel glass">
+        <h2>Video Editor</h2>
+        <p class="section-subtext">Turning footage into powerful stories — professional, emotional, and clean.</p>
+
+        <div class="video-category">
+          <h3>Brand & Commercial Edits</h3>
+          <p>Professional edits designed to sell and build trust.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="video-editor/brand1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="video-editor/brand2.mp4" type="video/mp4"></video>
+          </div>
         </div>
-      </div>
 
-      <div class="category fade-in">
-        <h3>Brand Presence & Engagement</h3>
-        <p>Building communities that care through storytelling and smart branding.</p>
-        <div class="video-grid">
-          <video controls poster="social-media-manager/engagement1.jpg">
-            <source src="social-media-manager/engagement1.mp4" type="video/mp4">
-          </video>
+        <div class="video-category">
+          <h3>Cinematic Cuts</h3>
+          <p>Emotional storytelling through color, rhythm, and sound.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="video-editor/cinematic1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="video-editor/cinematic2.mp4" type="video/mp4"></video>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
+        <div class="video-category">
+          <h3>Social Edits</h3>
+          <p>Fast, trendy edits crafted to capture attention in seconds.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="video-editor/social1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="video-editor/social2.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+      </section>
+
+      <!-- Social Media Manager -->
+      <section id="social-media-manager" class="panel glass">
+        <h2>Social Media Manager</h2>
+        <p class="section-subtext">Managing brands and creators — turning ideas into digital impact.</p>
+
+        <div class="video-category">
+          <h3>Strategy & Growth</h3>
+          <p>Planning data-driven campaigns to grow your digital presence.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="social-media-manager/strategy1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="social-media-manager/strategy2.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+
+        <div class="video-category">
+          <h3>Content Planning</h3>
+          <p>Organizing, scheduling, and optimizing brand content for consistency.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="social-media-manager/plan1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="social-media-manager/plan2.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+
+        <div class="video-category">
+          <h3>Brand Presence</h3>
+          <p>Building visual identity and engagement across all social platforms.</p>
+          <div class="video-gallery">
+            <video controls playsinline preload="metadata"><source src="social-media-manager/brand1.mp4" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="social-media-manager/brand2.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 SirPaul Entertainment</p>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
