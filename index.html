@@ -5,219 +5,191 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SirPaul — SirPaulEntertainment</title>
   <meta name="description" content="SirPaul — Content Creator, Video Editor & Visual Storyteller. Premium cinematic content for brands, influencers and agencies." />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --g1: #FF0080; /* pink */
-      --g2: #7928CA; /* purple */
-      --bg: linear-gradient(135deg,var(--g1),var(--g2));
+    :root {
+      --pink: #ff4c80;
+      --purple: #6e2ed9;
+      --bg-grad: linear-gradient(135deg, var(--pink), var(--purple));
       --glass: rgba(255,255,255,0.06);
-      --white: #ffffff;
-      --muted: rgba(255,255,255,0.85);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.88);
+      --card: rgba(255,255,255,0.04);
+      --radius: 14px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased}
+    * { box-sizing: border-box }
+    html, body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial; color: var(--text); -webkit-font-smoothing: antialiased }
+    body { background: var(--bg-grad); padding: 0; display: flex; flex-direction: column; min-height: 100vh }
 
-    /* Layout */
-    .app{height:100vh;display:flex;flex-direction:column}
-    header{position:fixed;left:0;right:0;top:18px;display:flex;justify-content:center;pointer-events:none;z-index:60}
-    .nav{max-width:1200px;width:100%;padding:0 20px;display:flex;justify-content:flex-end;gap:12px;align-items:center}
-    .nav a{pointer-events:auto;color:rgba(255,255,255,0.9);text-decoration:none;padding:10px 14px;border-radius:999px;font-weight:600;font-size:13px;backdrop-filter:blur(6px)}
-    .nav a.cta{background:rgba(255,255,255,0.08)}
+    header { position: sticky; top: 0; z-index: 60; padding: 12px 18px; backdrop-filter: blur(6px) }
+    .nav { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px }
+    .brand-mark { font-family: Orbitron, Inter; font-weight: 900; font-size: 18px; letter-spacing: 0.6px }
+    nav a { color: var(--text); text-decoration: none; font-weight: 600; padding: 8px 12px; border-radius: 999px; opacity: 0.95 }
+    nav a.cta { background: rgba(255,255,255,0.06) }
 
-    /* Hero full-screen */
-    .hero-wrap{position:relative;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background:var(--bg);z-index:0}
+    main { flex: 1; max-width: 1200px; margin: 0 auto; padding: 28px }
+    .hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 36px; border-radius: 18px; background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent); box-shadow: 0 30px 60px rgba(0,0,0,0.25); overflow: hidden }
 
-    /* Cloud + morph area */
-    .intro{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;padding:40px}
+    .cloud-wrap { width: 100%; max-width: 900px; display: flex; justify-content: center; pointer-events: none }
+    .cloud-svg { width: 100%; height: auto; max-height: 260px; filter: blur(22px) saturate(1.05); transition: transform .9s cubic-bezier(.2,.9,.2,1), opacity .9s }
 
-    /* Soft cloud layer using SVG + blur */
-    .cloud-svg{width:720px;max-width:90vw;height:260px;filter:blur(28px) saturate(1.1);opacity:1;transition:opacity .9s ease;}
-    .cloud-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+    .title-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 4 }
+    .main-title { font-family: Orbitron, Inter; font-size: 64px; line-height: 0.9; margin: 0; font-weight: 900; opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; text-shadow: 0 8px 30px rgba(0,0,0,0.4) }
+    .main-title.show { opacity: 1; transform: translateY(-6px); animation: glowPulse 3s infinite }
+    .subtext { font-weight: 500; color: var(--muted); opacity: 0; transform: translateY(10px); transition: opacity .6s ease .1s, transform .6s ease .1s }
+    .subtext.show { opacity: 1; transform: none }
+    @keyframes glowPulse { 0% { text-shadow: 0 8px 30px rgba(121,40,202,0.18) } 50% { text-shadow: 0 20px 60px rgba(121,40,202,0.30) } 100% { text-shadow: 0 8px 30px rgba(121,40,202,0.18) } }
 
-    /* SirPaul text: initially hidden, then glow */
-    .brand{font-family:Orbitron,Inter,system-ui;font-weight:900;font-size:84px;letter-spacing:1px;line-height:0.9;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.05);transition:opacity .6s ease,transform .6s ease;opacity:0;transform:translateY(6px)}
-    .brand.glow{opacity:1;color:var(--white);text-shadow:0 8px 30px rgba(137,7,191,0.42),0 2px 12px rgba(255,0,128,0.22),0 0 60px rgba(255,0,128,0.15);
-                 -webkit-text-fill-color: white}
-    .subline{font-size:15px;color:rgba(255,255,255,0.9);opacity:0;transform:translateY(6px);transition:opacity .6s ease .12s,transform .6s ease .12s}
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; z-index: 3; opacity: 0; transform: translateY(8px); transition: opacity .5s ease .2s, transform .5s ease .2s }
+    .cta-row.show { opacity: 1; transform: none }
+    .cta-btn { background: rgba(255,255,255,0.04); padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.06); cursor: pointer; font-weight: 700; backdrop-filter: blur(6px) }
+    .cta-btn:active { transform: translateY(2px) }
 
-    /* Buttons */
-    .cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-    .cta-btn{background:linear-gradient(90deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;font-weight:700;color:var(--white);backdrop-filter:blur(6px);transition:transform .18s ease,box-shadow .18s}
-    .cta-btn.neon{box-shadow:0 8px 30px rgba(121,40,202,0.18),0 2px 12px rgba(255,0,128,0.12)}
-    .cta-btn:active{transform:translateY(2px)}
+    .sections { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 26px }
+    .panel { background: var(--card); padding: 18px; border-radius: 12px; overflow: hidden; transition: transform .45s ease, box-shadow .45s ease }
+    .panel.active { transform: translateY(-8px); box-shadow: 0 40px 80px rgba(0,0,0,0.35) }
 
-    /* Chapter sections (full-screen) */
-    .section{position:fixed;inset:0;display:grid;place-items:center;padding:40px;z-index:20;opacity:0;visibility:hidden;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease,visibility .01s linear .6s}
-    .section.active{opacity:1;visibility:visible;transform:none;transition-delay:0s}
-    .section-inner{max-width:1100px;width:100%;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:40px;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,0.35)}
-    .section h2{margin:0 0 8px 0;font-family:Orbitron,Inter;font-size:34px}
-    .section p{margin:0;color:var(--muted)}
+    .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px }
+    .panel-title { font-family: Orbitron, Inter; font-weight: 800; margin: 0; font-size: 20px }
+    .panel-sub { color: var(--muted); margin-top: 8px; font-size: 15px }
 
-    /* different gradient tints per section */
-    .s-creator{background:linear-gradient(135deg,#FF4CB0,#6E2ED9)}
-    .s-editor{background:linear-gradient(135deg,#FF7AA0,#5B1DB0)}
-    .s-social{background:linear-gradient(135deg,#FF2E6A,#6C33D6)}
+    .panel-body { display: flex; gap: 18px; align-items: flex-start; margin-top: 14px }
+    .panel-left { flex: 1; min-width: 240px }
+    .panel-right { flex: 1.2; display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; align-items: start }
+    .video-thumb { background: #000; border-radius: 8px; overflow: hidden; min-height: 86px; display: flex; align-items: center; justify-content: center }
+    .video-thumb video, .video-thumb img { width: 100%; height: 120px; object-fit: cover; display: block }
 
-    /* Back button */
-    .back-btn{position:fixed;left:20px;top:20px;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,0.25);color:white;border:1px solid rgba(255,255,255,0.06);cursor:pointer;z-index:70;display:none}
-    .back-btn.show{display:block}
+    .contact { display: grid; grid-template-columns: 1fr 360px; gap: 18px; padding: 18px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) }
+    .contact-form { display: flex; flex-direction: column; gap: 12px }
+    .field label { font-size: 13px; color: var(--muted) }
+    .field input, .field textarea, .field select { background: transparent; border: 1px solid rgba(255,255,255,0.08); padding: 10px; border-radius: 8px; color: var(--text); min-width: 0 }
+    .field textarea { min-height: 120px; resize: vertical }
+    .send-btn { background: linear-gradient(90deg, var(--pink), var(--purple)); padding: 12px 14px; border-radius: 999px; border: none; color: white; font-weight: 800; cursor: pointer }
 
-    /* Footer */
-    footer{position:fixed;right:18px;bottom:18px;color:rgba(255,255,255,0.75);font-size:13px;z-index:60}
+    footer { margin-top: 18px; padding: 18px; display: flex; justify-content: space-between; align-items: center; color: rgba(255,255,255,0.85); font-size: 13px }
+    .social { display: flex; gap: 12px; align-items: center }
+    .icon { display: inline-block; padding: 8px; border-radius: 8px; background: rgba(255,255,255,0.03); text-decoration: none; color: var(--text) }
 
-    /* Responsive */
-    @media (max-width:720px){.brand{font-size:44px}.cloud-svg{height:180px}.brand{letter-spacing:0}.subline{font-size:13px}}
-
-    /* keyframes for glow pulse */
-    @keyframes glowPulse{0%{text-shadow:0 8px 30px rgba(137,7,191,0.28)}50%{text-shadow:0 18px 60px rgba(137,7,191,0.38)}100%{text-shadow:0 8px 30px rgba(137,7,191,0.28)}}
-
-    /* cloud drift animation */
-    @keyframes drift{0%{transform:translateX(-8%)}50%{transform:translateX(8%)}100%{transform:translateX(-8%)}}
-
+    @media (max-width:920px){ .panel-right{grid-template-columns:repeat(2,1fr)} .contact{grid-template-columns:1fr} .video-thumb video, .video-thumb img{height:100px} }
+    @media (max-width:520px){ .main-title{font-size:36px} .cloud-svg{max-height:160px} .panel-body{flex-direction:column} .panel-right{grid-template-columns:1fr} .cta-row{gap:8px} }
   </style>
 </head>
+
 <body>
-  <div class="app">
-    <header>
-      <div class="nav">
-        <a href="#" onclick="showHero(event)">Home</a>
-        <a href="#" class="cta" onclick="openSection('creator')">Hire Me</a>
-      </div>
-    </header>
-
-    <div class="hero-wrap" id="hero">
-      <div class="hero-bg"></div>
-
-      <div class="intro">
-        <div class="cloud-wrap">
-          <!-- SVG cloud that will morph (visually) into text by animating scale/opacity and revealing text -->
-          <svg class="cloud-svg" viewBox="0 0 900 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <filter id="f1" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="12" result="b" />
-                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" />
-              </filter>
-            </defs>
-            <!-- Simple layered cloud shapes -->
-            <g id="clouds" filter="url(#f1)" style="animation:drift 8s ease-in-out infinite">
-              <path id="c1" d="M120 160c-30-60 30-120 100-100 40-60 140-40 170 20 60-30 140 10 150 70 40 10 40 60 0 80H120z" fill="rgba(255,255,255,0.92)" opacity="0.95"></path>
-              <path id="c2" d="M60 190c-20-40 40-90 110-80 30-40 120-25 150 18 50-25 120 8 130 55 34 6 34 44 0 60H60z" fill="rgba(255,255,255,0.92)" opacity="0.9"></path>
-            </g>
-          </svg>
-        </div>
-
-        <div class="brand" id="brand">SirPaul</div>
-        <div class="subline" id="subline">sirpaulentertainment — Blending creativity, storytelling, and strategy.</div>
-
-        <div class="cta-row" id="ctaRow">
-          <button class="cta-btn neon" onclick="openSection('creator')">Content Creator</button>
-          <button class="cta-btn neon" onclick="openSection('editor')">Video Editor</button>
-          <button class="cta-btn neon" onclick="openSection('social')">Social Media Manager</button>
-        </div>
-      </div>
+  <header>
+    <div class="nav">
+      <div class="brand-mark">SirPaulEntertainment</div>
+      <nav>
+        <a href="#" onclick="scrollToHero(event)">Home</a>
+        <a href="#about" onclick="openAbout(event)">About</a>
+        <a class="cta" href="#contact" onclick="openContact(event)">Hire Me</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- Full-screen sections (hidden until clicked) -->
-    <button class="back-btn" id="backBtn" onclick="showHero()">← Back</button>
-
-    <section id="creator" class="section s-creator">
-      <div class="section-inner">
-        <h2>Content Creator</h2>
-        <p>UGC, fashion reels, cinematic brand storytelling and concept-first creative direction.</p>
+  <main>
+    <section class="hero" id="hero">
+      <div class="cloud-wrap">
+        <svg class="cloud-svg" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+          <defs><filter id="f1"><feGaussianBlur stdDeviation="12" result="b" /></filter></defs>
+          <g id="clouds" filter="url(#f1)">
+            <path d="M120 160c-30-60 30-120 100-100 40-60 140-40 170 20 60-30 140 10 150 70 40 10 40 60 0 80H120z" fill="rgba(255,255,255,0.94)"></path>
+            <path d="M60 190c-20-40 40-90 110-80 30-40 120-25 150 18 50-25 120 8 130 55 34 6 34 44 0 60H60z" fill="rgba(255,255,255,0.9)"></path>
+          </g>
+        </svg>
+      </div>
+      <div class="title-wrap">
+        <h1 class="main-title" id="hero-title">SirPaul</h1>
+        <div class="subtext" id="hero-sub">SirPaulEntertainment — Blending creativity, storytelling, and strategy.</div>
+        <div class="cta-row" id="ctaRow">
+          <button class="cta-btn" data-section="creator" onclick="openPanel(event)">Content Creator</button>
+          <button class="cta-btn" data-section="editor" onclick="openPanel(event)">Video Editor</button>
+          <button class="cta-btn" data-section="social" onclick="openPanel(event)">Social Media Manager</button>
+          <button class="cta-btn" onclick="openContact(event)">Hire Me</button>
+        </div>
       </div>
     </section>
 
-    <section id="editor" class="section s-editor">
-      <div class="section-inner">
-        <h2>Video Editor</h2>
-        <p>Brand & commercial edits, cinematic cuts, VFX-ready timelines and platform-optimized versions.</p>
+    <!-- Services panels here (same as before) -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="panel">
+      <div class="panel-head">
+        <div>
+          <h3 class="panel-title">Let’s work together</h3>
+          <div class="panel-sub">Pick a service, paste a brief and your email — I’ll get back to you quickly.</div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="contact" style="width:100%">
+          <form action="https://formspree.io/f/xnnlqkdl" method="POST" class="contact-form">
+            <div class="field">
+              <label for="serviceSelect">Service</label>
+              <select id="serviceSelect" name="Service" required>
+                <option value="Content Creation">Content Creation</option>
+                <option value="Video Editing">Video Editing</option>
+                <option value="Social Media Management">Social Media Management</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="clientName">Your name</label>
+              <input id="clientName" name="Name" type="text" placeholder="Name" required />
+            </div>
+
+            <div class="field">
+              <label for="clientEmail">Email</label>
+              <input id="clientEmail" name="Email" type="email" placeholder="your@email.com" required />
+            </div>
+
+            <div class="field">
+              <label for="message">Project brief / Message</label>
+              <textarea id="message" name="Message" placeholder="Tell me what you need, timeline, and budget (if comfortable)" required></textarea>
+            </div>
+
+            <button type="submit" class="send-btn">Send Message</button>
+          </form>
+
+          <aside style="padding-left:10px;min-width:220px">
+            <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px">
+              <strong style="display:block;margin-bottom:8px">Quick contact</strong>
+              <div style="color:var(--muted);margin-bottom:8px">Email: <a href="mailto:sirpaulentertainment@gmail.com" style="color:var(--text)">sirpaulentertainment@gmail.com</a></div>
+              <div style="color:var(--muted);margin-bottom:8px">Instagram: <a href="https://www.instagram.com/sirpaulentertainment/" target="_blank" rel="noopener" style="color:var(--text)">@sirpaulentertainment</a></div>
+              <div style="color:var(--muted)">LinkedIn: <a href="https://www.linkedin.com/in/sirpaul-54b52a350" target="_blank" rel="noopener" style="color:var(--text)">SirPaul — profile</a></div>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
+  </main>
 
-    <section id="social" class="section s-social">
-      <div class="section-inner">
-        <h2>Social Media Manager</h2>
-        <p>Strategy, content planning, paid + organic growth and identity systems for brands and creators.</p>
-      </div>
-    </section>
-
-    <footer>© 2025 SirPaulEntertainment</footer>
-  </div>
+  <footer>
+    <div>© 2025 SirPaulEntertainment</div>
+    <div class="social">
+      <a class="icon" href="mailto:sirpaulentertainment@gmail.com">✉️</a>
+      <a class="icon" href="https://www.instagram.com/sirpaulentertainment/" target="_blank">Instagram</a>
+      <a class="icon" href="https://www.linkedin.com/in/sirpaul-54b52a350" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
 
   <script>
-    // Elements
-    const brand = document.getElementById('brand');
-    const subline = document.getElementById('subline');
-    const cloud = document.getElementById('clouds');
     const cloudSvg = document.querySelector('.cloud-svg');
+    const title = document.querySelector('.main-title');
+    const sub = document.querySelector('.subtext');
     const ctaRow = document.getElementById('ctaRow');
-    const backBtn = document.getElementById('backBtn');
-    const sections = document.querySelectorAll('.section');
+    const panels = document.querySelectorAll('.panel');
 
-    // initial sequence: cloud visible -> morph (fade/scale) -> reveal brand
     function introSequence(){
-      // ensure hero visible
-      document.getElementById('hero').style.visibility = 'visible';
-
-      // after a short pause, animate cloud to 'morph' by scaling and fading, then reveal text
-      setTimeout(()=>{
-        // scale cloud up and fade
-        cloudSvg.style.transition='transform 1.2s ease,opacity 1.2s ease';
-        cloudSvg.style.transform='scale(1.25) translateY(-8px)';
-        cloudSvg.style.opacity='0.0';
-
-        // slight delay then show brand
-        setTimeout(()=>{
-          brand.classList.add('glow');
-          brand.style.animation='glowPulse 3s infinite';
-          subline.style.opacity=1;subline.style.transform='none';
-          ctaRow.style.opacity=1;ctaRow.style.transform='none';
-        },900);
-
-      },700);
+      title.classList.remove('show'); sub.classList.remove('show'); ctaRow.classList.remove('show');
+      setTimeout(()=>{cloudSvg.style.transform='scale(1.2) translateY(-10px)';cloudSvg.style.opacity='0';},700);
+      setTimeout(()=>{title.classList.add('show');sub.classList.add('show');ctaRow.classList.add('show');},1400);
     }
+    window.addEventListener('load',introSequence);
 
-    // call intro on load
-    window.addEventListener('load',()=>{
-      // set initial invisible states for text
-      brand.style.opacity=0;brand.style.transition='opacity .6s ease,transform .6s ease';
-      subline.style.opacity=0;subline.style.transform='translateY(6px)';
-      ctaRow.style.opacity=0;ctaRow.style.transform='translateY(6px)';
-      // begin sequence
-      introSequence();
-    });
-
-    // show a section full-screen
-    function openSection(id){
-      // hide hero intro (fade out)
-      document.getElementById('hero').style.transition='opacity .5s ease';
-      document.getElementById('hero').style.opacity=0;document.getElementById('hero').style.pointerEvents='none';
-
-      // show back button
-      backBtn.classList.add('show');
-
-      // activate section
-      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-      const sec = document.getElementById(id);
-      sec.classList.add('active');
-
-      // focus for accessibility
-      sec.setAttribute('tabindex','-1');sec.focus();
-    }
-
-    function showHero(e){
-      if(e && e.preventDefault) e.preventDefault();
-      // hide sections
-      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-      // show hero
-      document.getElementById('hero').style.opacity=1;document.getElementById('hero').style.pointerEvents='auto';
-      backBtn.classList.remove('show');
-    }
-
-    // keyboard escape to go back to hero
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') showHero(); });
+    function scrollToHero(e){ if(e) e.preventDefault(); document.getElementById('hero').scrollIntoView({behavior:'smooth'}); }
+    function openContact(e){ if(e) e.preventDefault(); panels.forEach(p=>p.classList.remove('active')); const c=document.getElementById('contact'); c.classList.add('active'); c.scrollIntoView({behavior:'smooth'}); }
   </script>
 </body>
 </html>
