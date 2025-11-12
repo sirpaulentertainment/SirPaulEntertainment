@@ -1,146 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SirPaul Entertainment</title>
+  <title>SirPaul — SirPaulEntertainment</title>
+  <meta name="description" content="SirPaul — Content Creator, Video Editor & Visual Storyteller. Premium cinematic content for brands, influencers and agencies." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;900&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #ff5167;
+      --bg2: #9b4cff;
+      --accent: rgba(255,255,255,0.12);
+      --pill-bg: rgba(0,0,0,0.35);
+      --glass: rgba(255,255,255,0.06);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.85);
+      --radius: 28px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{color:var(--text);background:linear-gradient(135deg,var(--bg1),var(--bg2));-webkit-font-smoothing:antialiased}
+    header{position:sticky;top:0;backdrop-filter:blur(6px);z-index:40}
+    .nav-wrap{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
 
-  <!-- Montserrat font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    .logo{font-weight:900;font-size:20px;letter-spacing:0.4px}
+    nav ul{display:flex;gap:14px;align-items:center;padding:0;margin:0;list-style:none}
+    nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:14px;opacity:0.95}
+    .cta{background:rgba(0,0,0,0.35);padding:10px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.3);}
 
-  <link rel="stylesheet" href="styles.css" />
+    main{max-width:1200px;margin:0 auto;padding:48px 20px}
+
+    .hero{min-height:320px;display:flex;align-items:center;justify-content:center;text-align:center;padding:48px 20px;position:relative}
+    .hero-media{position:absolute;inset:0;overflow:hidden;border-radius:18px;filter:blur(0px);opacity:0.12}
+    .hero-media video, .hero-media img{width:100%;height:100%;object-fit:cover}
+    .hero-inner{position:relative;z-index:2;padding:64px 20px}
+    .name{font-size:44px;font-weight:900;margin:0;line-height:1;letter-spacing:-0.6px}
+    .subtitle{margin-top:10px;color:var(--muted);font-size:16px}
+
+    .pills{display:flex;gap:14px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+    .pill{background:linear-gradient(180deg,rgba(0,0,0,0.36),rgba(0,0,0,0.28));padding:12px 22px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,0.35);cursor:pointer;transition:transform .18s ease,box-shadow .18s}
+    .pill:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.45)}
+
+    .section{background:linear-gradient(180deg,transparent rgba(255,255,255,0.02));padding:64px 20px;border-radius:12px;margin-top:24px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .service{background:var(--glass);padding:20px;border-radius:14px;min-height:140px;display:flex;flex-direction:column;justify-content:space-between}
+    .service h4{margin:0 0 8px 0;font-size:18px}
+    .service p{margin:0;color:var(--muted);font-size:14px}
+    .service a{align-self:flex-start;margin-top:12px;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,0.06);text-decoration:none;color:var(--text);font-weight:600}
+
+    .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .thumb{position:relative;border-radius:10px;overflow:hidden;cursor:pointer}
+    .thumb img{width:100%;height:220px;object-fit:cover;display:block;transition:transform .35s}
+    .thumb:hover img{transform:scale(1.05)}
+    .thumb .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.45));display:flex;align-items:flex-end;padding:12px;color:#fff}
+
+    .pricing{display:flex;gap:14px}
+    .plan{flex:1;background:rgba(255,255,255,0.04);padding:18px;border-radius:12px}
+    .plan h3{margin-top:0}
+    .plan ul{padding-left:18px}
+
+    .contact-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{display:flex;flex-direction:column}
+    .field label{font-size:13px;margin-bottom:6px;color:var(--muted)}
+    .field input,.field textarea,.select{background:transparent;border:1px solid rgba(255,255,255,0.08);padding:10px;border-radius:8px;color:var(--text)}
+    textarea{min-height:120px;resize:vertical}
+    .submit{grid-column:span 2;justify-self:start;padding:12px 20px;border-radius:999px;background:linear-gradient(90deg,#ff6b80,#8a49ff);border:none;color:white;font-weight:700;cursor:pointer}
+
+    footer{max-width:1200px;margin:28px auto;padding:12px 20px;color:rgba(255,255,255,0.7);font-size:13px}
+
+    @media (max-width:920px){.grid,.portfolio-grid{grid-template-columns:repeat(2,1fr)}.pricing{flex-direction:column}.contact-form{grid-template-columns:1fr}.name{font-size:34px}}
+    @media (max-width:520px){.name{font-size:26px}.hero-inner{padding:32px}}
+
+    .fade-in{opacity:0;transform:translateY(10px);animation:enter .7s cubic-bezier(.2,.9,.2,1) forwards}
+    @keyframes enter{to{opacity:1;transform:none}}
+  </style>
 </head>
 <body>
-  <!-- INTRO (full-screen) -->
-  <div id="intro" aria-hidden="true">
-    <div class="intro-inner">
-      <div class="blob red"></div>
-      <div class="blob blue"></div>
+  <header>
+    <div class="nav-wrap">
+      <div class="logo">SirPaul</div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="cta" href="#contact">Hire Me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-      <div class="logo-wrap">
-        <h1 class="logo-text">SirPaul</h1>
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-media" aria-hidden="true">
+        <video autoplay muted loop playsinline>
+          <source src="/assets/hero.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="hero-inner">
+        <h1 class="name fade-in">SirPaul — Content Creator • Video Editor • Visual Storyteller</h1>
+        <p class="subtitle fade-in" style="animation-delay:.08s">Blending fashion, cinematic storytelling, and visual emotion for brands and creators.</p>
+
+        <div class="pills fade-in" style="animation-delay:.16s">
+          <div class="pill" onclick="location.href='#portfolio'">Content Creator</div>
+          <div class="pill" onclick="location.href='#portfolio'">Video Editor</div>
+          <div class="pill" onclick="location.href='#services'">Social Media Manager</div>
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a href="#contact" class="submit" style="padding:12px 20px;border-radius:999px;display:inline-block;max-width:220px;text-align:center;">Hire Me</a>
+          <a href="#portfolio" class="pill" style="background:transparent;border:1px solid rgba(255,255,255,0.08);">View Portfolio</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section fade-in">
+      <h2 style="margin-top:0">Services</h2>
+      <div class="grid" style="margin-top:16px">
+        <div class="service">
+          <div>
+            <h4>Content Creation</h4>
+            <p>UGC & ads, creative social concepts, fashion storytelling and cinematic shoots tailored to brand voice.</p>
+          </div>
+          <a href="#portfolio">Learn More →</a>
+        </div>
+
+        <div class="service">
+          <div>
+            <h4>Video Editing</h4>
+            <p>Brand & commercial edits, cinematic cuts, social edits optimized for engagement and platform specs.</p>
+          </div>
+          <a href="#portfolio">Learn More →</a>
+        </div>
+
+        <div class="service">
+          <div>
+            <h4>Social Media Management</h4>
+            <p>Strategy, content planning, paid and organic growth — building consistent, premium brand presence.</p>
+          </div>
+          <a href="#contact">Learn More →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="section fade-in">
+      <h2 style="margin-top:0">Portfolio</h2>
+      <p style="color:var(--muted)">Selected works — click to open lightbox.</p>
+
+      <div class="portfolio-grid" style="margin-top:12px">
+        <div class="thumb" onclick="openLightbox('/assets/portfolio1.mp4')">
+          <img src="/assets/portfolio1.jpg" alt="Ad — Brand X">
+          <div class="overlay">Ad — Brand X</div>
+        </div>
+        <div class="thumb" onclick="openLightbox('/assets/portfolio2.mp4')">
+          <img src="/assets/portfolio2.jpg" alt="Fashion Reel">
+          <div class="overlay">Fashion Reel</div>
+        </div>
+        <div class="thumb" onclick="openLightbox('/assets/portfolio3.mp4')">
+          <img src="/assets/portfolio3.jpg" alt="Cinematic Short">
+          <div class="overlay">Cinematic Short</div>
+        </div>
+        <div class="thumb" onclick="openLightbox('/assets/portfolio4.mp4')">
+          <img src="/assets/portfolio4.jpg" alt="Social Edit">
+          <div class="overlay">Social Edit</div>
+        </div>
+        <div class="thumb" onclick="openLightbox('/assets/portfolio5.mp4')">
+          <img src="/assets/portfolio5.jpg" alt="Brand Film">
+          <div class="overlay">Brand Film</div>
+        </div>
+        <div class="thumb" onclick="openLightbox('/assets/portfolio6.mp4')">
+          <img src="/assets/portfolio6.jpg" alt="VFX Reel">
+          <div class="overlay">VFX Reel</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section fade-in">
+      <h2 style="margin-top:0">Pricing</h2>
+      <p style="color:var(--muted)">Transparent tiers. Request a custom quote for full packages and brand work.</p>
+      <div class="pricing" style="margin-top:16px">
+        <div class="plan">
+          <h3>Starter</h3>
+          <p style="color:var(--muted)">Best for creators & small projects</p>
+          <ul>
+            <li>1 Social edit / 1 concept</li>
+            <li>2 revisions</li>
+            <li>3–5 day turnaround</li>
+          </ul>
+          <div style="margin-top:12px"><a href="#contact" class="submit" style="padding:8px 12px;font-weight:700;border-radius:10px;">Get a Custom Quote</a></div>
+        </div>
+        <div class="plan">
+          <h3>Professional</h3>
+          <p style="color:var(--muted)">For brands, campaigns & collaborations</p>
+          <ul>
+            <li>Up to 3 edits / Concepts + storyboards</li>
+            <li>Priority support</li>
+            <li>Rush delivery available</li>
+          </ul>
+          <div style="margin-top:12px"><a href="#contact" class="submit" style="padding:8px 12px;font-weight:700;border-radius:10px;">Get a Custom Quote</a></div>
+        </div>
+        <div class="plan">
+          <h3>Premium</h3>
+          <p style="color:var(--muted)">Full-service cinematic packages</p>
+          <ul>
+            <li>Concept, shoot, edit, VFX</li>
+            <li>Dedicated producer & priority slots</li>
+            <li>Full usage/license options</li>
+          </ul>
+          <div style="margin-top:12px"><a href="#contact" class="submit" style="padding:8px 12px;font-weight:700;border-radius:10px;">Get a Custom Quote</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section fade-in" style="margin-top:24px">
+      <h2 style="margin-top:0">About</h2>
+      <p style="color:var(--muted)">SirPaul — a versatile content creator, model and editor who blends fashion, storytelling and cinematic technique for high-impact visual work. Experience across ads, fashion reels, YouTube, film and social-first campaigns.</p>
+    </section>
+
+    <section id="contact" class="section fade-in" style="margin-top:24px">
+      <h2 style="margin-top:0">Contact</h2>
+      <p style="color:var(--muted)">Send details and an estimated budget — I'll respond within 48 hours.</p>
+
+      <form class="contact-form" onsubmit="handleForm(event)">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+        <div class="field" style="grid-column:span 2">
+          <label for="service">Service</label>
+          <select id="service" class="select">
+            <option>Content Creation</option>
+            <option>Video Editing</option>
+            <option>Social Media Management</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field" style="grid-column:span 2">
+          <label for="message">Message & Project Brief</label>
+          <textarea id="message" name="message"></textarea>
+        </div>
+        <button type="submit" class="submit">Book a Call / Send Message</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div>&copy; 2025 SirPaulEntertainment</div>
+      <div style="display:flex;gap:12px">
+        <a href="#" style="color:inherit;text-decoration:none">Instagram</a>
+        <a href="#" style="color:inherit;text-decoration:none">YouTube</a>
+        <a href="#" style="color:inherit;text-decoration:none">LinkedIn</a>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <!-- MAIN SITE -->
-  <div id="site" class="hidden">
-    <div class="animated-bg"></div>
-
-    <header class="hero glass">
-      <div class="hero-inner">
-        <h1 class="brand">SirPaul Entertainment</h1>
-        <p class="tag">Creating stories through visuals — from content to cinema.</p>
-      </div>
-    </header>
-
-    <main>
-      <!-- Content Creator -->
-      <section id="content-creator" class="panel glass">
-        <h2>Content Creator</h2>
-        <p class="section-subtext">I craft engaging, brand-focused content — from UGC to cinematic visuals.</p>
-
-        <div class="video-category">
-          <h3>UGC & Ads</h3>
-          <p>Authentic, performance-driven content that sells without shouting.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="content-creator/ugc1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="content-creator/ugc2.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="content-creator/ugc3.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-
-        <div class="video-category">
-          <h3>Creative</h3>
-          <p>Unique, imaginative visuals that blend art and storytelling.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="content-creator/creative1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="content-creator/creative2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-
-        <div class="video-category">
-          <h3>Cinematic</h3>
-          <p>Visually rich, emotional content made to inspire and connect.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="content-creator/cinematic1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="content-creator/cinematic2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-      </section>
-
-      <!-- Video Editor -->
-      <section id="video-editor" class="panel glass">
-        <h2>Video Editor</h2>
-        <p class="section-subtext">Turning footage into powerful stories — professional, emotional, and clean.</p>
-
-        <div class="video-category">
-          <h3>Brand & Commercial Edits</h3>
-          <p>Professional edits designed to sell and build trust.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="video-editor/brand1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="video-editor/brand2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-
-        <div class="video-category">
-          <h3>Cinematic Cuts</h3>
-          <p>Emotional storytelling through color, rhythm, and sound.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="video-editor/cinematic1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="video-editor/cinematic2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-
-        <div class="video-category">
-          <h3>Social Edits</h3>
-          <p>Fast, trendy edits crafted to capture attention in seconds.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="video-editor/social1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="video-editor/social2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-      </section>
-
-      <!-- Social Media Manager -->
-      <section id="social-media-manager" class="panel glass">
-        <h2>Social Media Manager</h2>
-        <p class="section-subtext">Managing brands and creators — turning ideas into digital impact.</p>
-
-        <div class="video-category">
-          <h3>Strategy & Growth</h3>
-          <p>Planning data-driven campaigns to grow your digital presence.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="social-media-manager/strategy1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="social-media-manager/strategy2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-
-        <div class="video-category">
-          <h3>Content Planning</h3>
-          <p>Organizing, scheduling, and optimizing brand content for consistency.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="social-media-manager/plan1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="social-media-manager/plan2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-
-        <div class="video-category">
-          <h3>Brand Presence</h3>
-          <p>Building visual identity and engagement across all social platforms.</p>
-          <div class="video-gallery">
-            <video controls playsinline preload="metadata"><source src="social-media-manager/brand1.mp4" type="video/mp4"></video>
-            <video controls playsinline preload="metadata"><source src="social-media-manager/brand2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <p>© 2025 SirPaul Entertainment</p>
-    </footer>
-  </div>
-
-  <script src="script.js" defer></script>
-</body>
-</html>
