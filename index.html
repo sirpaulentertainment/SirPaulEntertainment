@@ -1,272 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SirPaul — SirPaulEntertainment</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --pink: #ff4c80;
-    --purple: #6e2ed9;
-    --text: #fff;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    height: 100%;
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    background-size: 300% 300%;
-    animation: gradientMove 15s ease infinite;
-    color: var(--text);
-    overflow: hidden;
-  }
-
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Intro animation */
-  #intro {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    animation: gradientMove 15s ease infinite;
-    z-index: 10;
-    opacity: 1;
-    transition: opacity 1.2s ease;
-  }
-
-  #intro.fade-out { opacity: 0; pointer-events: none; }
-
-  .intro-text {
-    font-size: 64px;
-    font-weight: 800;
-    text-shadow: 0 0 20px rgba(255,255,255,0.4);
-    opacity: 0;
-    transform: scale(0.95);
-    animation: zoomFadeIn 2s ease forwards;
-  }
-
-  @keyframes zoomFadeIn {
-    0% { opacity: 0; transform: scale(0.95); filter: blur(5px); }
-    40% { opacity: 1; transform: scale(1.03); filter: blur(0); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-
-  /* Main container */
-  .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-    transition: opacity 0.5s ease;
-  }
-
-  .hidden { display: none; }
-
-  /* Buttons */
-  .top-right {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 14px;
-    background: rgba(255,255,255,0.1);
-    padding: 8px 16px;
-    border-radius: 999px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s, box-shadow 0.3s;
-  }
-  .top-right:hover {
-    background: rgba(255,255,255,0.2);
-    box-shadow: 0 0 10px rgba(255,255,255,0.4);
-  }
-
-  .center-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .btn {
-    background: rgba(255,255,255,0.08);
-    border: none;
-    border-radius: 999px;
-    padding: 12px 20px;
-    color: white;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .btn:hover {
-    background: rgba(255,255,255,0.25);
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(255,255,255,0.4);
-  }
-
-  .hire-btn { margin-top: 20px; }
-
-  /* Section views */
-  .section {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    text-align: center;
-    background: linear-gradient(135deg, var(--pink), var(--purple));
-    background-size: 300% 300%;
-    animation: gradientMove 15s ease infinite;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-
-  .section.active { opacity: 1; z-index: 5; }
-
-  .back-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: rgba(255,255,255,0.1);
-    border: none;
-    border-radius: 999px;
-    padding: 8px 16px;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s, box-shadow 0.3s;
-  }
-
-  .back-btn:hover {
-    background: rgba(255,255,255,0.2);
-    box-shadow: 0 0 10px rgba(255,255,255,0.4);
-  }
-
-  .section h2 { font-size: 28px; margin-bottom: 12px; font-weight: 800; }
-  .section p { max-width: 600px; line-height: 1.6; font-size: 15px; }
-
-  /* Footer icons */
-  .footer {
-    position: absolute;
-    bottom: 20px;
-    display: flex;
-    gap: 18px;
-  }
-
-  .icon {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    opacity: 0.8;
-    transition: opacity 0.3s, transform 0.3s;
-  }
-
-  .icon:hover {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-
-  @media (max-width: 600px) {
-    .intro-text { font-size: 40px; }
-    .btn { font-size: 14px; padding: 10px 16px; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SirPaul Entertainment</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<div id="intro">
-  <div class="intro-text">SirPaul</div>
-</div>
-
-<div class="main" id="mainMenu">
-  <div class="top-right" onclick="openSection('about')">About Me</div>
-
-  <div class="center-buttons">
-    <button class="btn" onclick="openSection('creator')">Content Creator</button>
-    <button class="btn" onclick="openSection('editor')">Video Editor</button>
-    <button class="btn" onclick="openSection('social')">Social Media Manager</button>
+  <!-- Intro Section -->
+  <div id="intro">
+    <div class="cloud"></div>
+    <h1 class="sirpaul-text">SirPaul</h1>
   </div>
 
-  <button class="btn hire-btn" onclick="openSection('hire')">Hire Me</button>
+  <!-- Main Menu -->
+  <div id="main-menu" class="hidden">
+    <button id="aboutBtn" class="about-btn">About Me</button>
 
-  <div class="footer">
-    <a href="mailto:sirpaulentertainment@gmail.com" class="icon">✉️</a>
-    <a href="https://www.instagram.com/sirpaulentertainment/" target="_blank" class="icon">📸</a>
-    <a href="https://www.linkedin.com/in/sirpaul-54b52a350" target="_blank" class="icon">💼</a>
+    <div class="center-buttons">
+      <button class="menu-btn" data-target="creator">Content Creator</button>
+      <button class="menu-btn" data-target="editor">Video Editor</button>
+      <button class="menu-btn" data-target="manager">Social Media Manager</button>
+    </div>
+
+    <button id="hireBtn" class="hire-btn">Hire Me</button>
+
+    <div class="socials">
+      <div class="icons">
+        <a href="https://instagram.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG"></a>
+        <a href="https://linkedin.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn"></a>
+        <a href="mailto:sirpaulentertainment@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email"></a>
+      </div>
+      <p class="copyright">© SirPaulEntertainment. All Rights Reserved.</p>
+    </div>
   </div>
-</div>
 
-<!-- Sections -->
-<div id="about" class="section">
-  <button class="back-btn" onclick="goBack()">← Back</button>
-  <h2>About Me</h2>
-  <p>I'm Paul Ramsiamliana — a content creator, professional video editor, and storyteller. 
-     My work blends fashion, storytelling, and emotion to create visuals that connect with people. 
-     From brand campaigns to cinematic edits, I build visuals that don’t just look good — they sell, inspire, and leave impact.</p>
-</div>
+  <!-- Sections -->
+  <div id="sections">
+    <div class="section" id="about">
+      <button class="back-btn">← Back</button>
+      <h1>About Me</h1>
+      <p>Hi, I’m Paul Ramsiamliana — a visual storyteller blending creativity and emotion through film, fashion, and digital media. My journey merges art and storytelling to help brands and creators express their essence through powerful visuals.</p>
+    </div>
 
-<div id="creator" class="section">
-  <button class="back-btn" onclick="goBack()">← Back</button>
-  <h2>Content Creator</h2>
-  <p>I create original, strategy-driven content for brands and creators. From concept and scripting to on-camera performance and editing, 
-     I make sure every piece feels premium, authentic, and built for engagement.</p>
-</div>
+    <div class="section" id="creator">
+      <button class="back-btn">← Back</button>
+      <h1>Content Creator</h1>
+      <p>I craft high-performing content that connects — from cinematic reels to inspiring brand stories that spark engagement and leave a lasting impact.</p>
+    </div>
 
-<div id="editor" class="section">
-  <button class="back-btn" onclick="goBack()">← Back</button>
-  <h2>Video Editor</h2>
-  <p>I edit cinematic stories, social media reels, and ad campaigns that grab attention. 
-     I focus on pacing, tone, and emotion to create results that feel both professional and human.</p>
-</div>
+    <div class="section" id="editor">
+      <button class="back-btn">← Back</button>
+      <h1>Video Editor</h1>
+      <p>From YouTube series to short-form ads, I turn raw footage into compelling visuals with clean cuts, emotion-driven pacing, and storytelling precision.</p>
+    </div>
 
-<div id="social" class="section">
-  <button class="back-btn" onclick="goBack()">← Back</button>
-  <h2>Social Media Manager</h2>
-  <p>I manage and strategize brand identities across platforms — from content calendars and ad creatives 
-     to consistent visual language that drives community and growth.</p>
-</div>
+    <div class="section" id="manager">
+      <button class="back-btn">← Back</button>
+      <h1>Social Media Manager</h1>
+      <p>I manage accounts for influencers, startups, and brands — focusing on growth, content strategy, and results that drive attention and conversion.</p>
+    </div>
 
-<div id="hire" class="section">
-  <button class="back-btn" onclick="goBack()">← Back</button>
-  <h2>Let’s Work Together</h2>
-  <p>For collaborations, partnerships, or professional video editing work — reach me directly at 
-     <a href="mailto:sirpaulentertainment@gmail.com" style="color:white;text-decoration:underline;">sirpaulentertainment@gmail.com</a></p>
-</div>
+    <div class="section" id="hire">
+      <button class="back-btn">← Back</button>
+      <h1>Hire Me</h1>
+      <form action="https://formspree.io/f/xnnlqkdl" method="POST" class="hire-form">
+        <label>Your Email</label>
+        <input type="email" name="email" required>
+        <label>Message</label>
+        <textarea name="message" rows="4" placeholder="Tell me about your project..."></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
 
-<script>
-  // Intro fade-out after 2 seconds
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('intro').classList.add('fade-out');
-    }, 2000);
-  });
-
-  function openSection(id) {
-    document.getElementById('mainMenu').style.opacity = '0';
-    setTimeout(() => {
-      document.getElementById('mainMenu').classList.add('hidden');
-      document.getElementById(id).classList.add('active');
-    }, 300);
-  }
-
-  function goBack() {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById('mainMenu').classList.remove('hidden');
-    setTimeout(() => document.getElementById('mainMenu').style.opacity = '1', 100);
-  }
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
