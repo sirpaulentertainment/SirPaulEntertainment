@@ -6,82 +6,82 @@
   <title>SirPaul</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <!-- Intro -->
+  <!-- ===== INTRO ===== -->
   <div class="intro">
     <div class="cloud"></div>
     <h1 class="intro-logo">SirPaul</h1>
   </div>
 
-  <!-- Main Content -->
-  <div class="main hidden">
-    <button class="about-btn">About Me</button>
+  <!-- ===== MAIN PAGE ===== -->
+  <div class="main-content hidden">
+    <button class="about-btn" data-target="about">About Me</button>
 
     <div class="center-content">
       <div class="roles">
-        <button class="role-btn" onclick="openPage('content-creator')">Content Creator</button>
-        <button class="role-btn" onclick="openPage('video-editor')">Video Editor</button>
-        <button class="role-btn" onclick="openPage('social-media')">Social Media Manager</button>
+        <button class="role-btn" data-target="content">Content Creator</button>
+        <button class="role-btn" data-target="video">Video Editor</button>
+        <button class="role-btn" data-target="social">Social Media Manager</button>
       </div>
-
-      <button class="hire-btn" onclick="openPage('hire-me')">Hire Me</button>
+      <button class="hire-btn" data-target="hire">Hire Me</button>
     </div>
+
+    <footer>
+      <p>© SirPaulEntertainment</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/sirpaulentertainment/" target="_blank">Instagram</a>
+        <a href="https://www.linkedin.com/in/sirpaul-54b52a350?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
   </div>
 
-  <!-- Pages -->
-  <div id="about" class="page hidden">
-    <button class="back-btn" onclick="goBack()">← Back</button>
-    <h2>About Me</h2>
-    <p>I'm Paul, a creative professional blending storytelling, visual art, and strategy to craft powerful content that connects with audiences. I specialize in producing engaging videos and social content that elevate brands and creators alike.</p>
-  </div>
+  <!-- ===== SECTIONS (use subtext from old version) ===== -->
+  <section class="view hidden" id="about">
+    <button class="back-btn">← Back</button>
+    <h1>About Me</h1>
+    <p>I’m SirPaul, a video–first creator obsessed with rhythm, emotion, and detail. I don’t just make content — I shape moments into stories people remember.</p>
+    <p>Over the last few years I’ve edited for brands, creators, and startups that care about how they show up online. From quick-fire UGC to cinematic cuts, I focus on three things: <strong>clarity, emotion, and conversion.</strong></p>
+    <p>I understand both sides of the game: the creative that stops the scroll, and the strategy that keeps people watching. Every frame has a job. Every cut has a reason.</p>
+    <p>If you’re looking for someone who simply follows instructions, I’m not your guy. If you want someone who treats your idea like their own and thinks in hooks, pacing, and outcomes — that’s where I come in.</p>
+  </section>
 
-  <div id="content-creator" class="page hidden">
-    <button class="back-btn" onclick="goBack()">← Back</button>
-    <h2>Content Creator</h2>
-    <p>I create visually captivating and emotionally driven short-form and long-form content for social platforms — from UGC videos and ads to cinematic storytelling pieces.</p>
-  </div>
+  <section class="view hidden" id="content">
+    <button class="back-btn">← Back</button>
+    <h1>Content Creator</h1>
+    <p>I create content that feels human, not manufactured. From vertical short-form videos to full campaign series, I help you develop concepts, shape hooks, and tell stories that fit your voice and audience.</p>
+    <p>I work with personal brands, creators, and startups that want a consistent, cinematic feel — content that looks good, sounds clear, and moves people to action.</p>
+  </section>
 
-  <div id="video-editor" class="page hidden">
-    <button class="back-btn" onclick="goBack()">← Back</button>
-    <h2>Video Editor</h2>
-    <p>Professional video editing for brands, influencers, and startups. From UGC and ads to cinematic films, I bring ideas to life with precision and style.</p>
-  </div>
+  <section class="view hidden" id="video">
+    <button class="back-btn">← Back</button>
+    <h1>Video Editor</h1>
+    <p>Clean cuts. Precise pacing. Story at the center. I specialise in editing UGC, TikTok/Reels, brand ads, cinematic pieces, and product videos that keep viewers watching and make the message unforgettable.</p>
+    <p>From rough footage to final export, I handle cuts, pacing, sound design, basic VFX, color mood, and final polish. You bring the vision — I turn it into something people want to watch again.</p>
+  </section>
 
-  <div id="social-media" class="page hidden">
-    <button class="back-btn" onclick="goBack()">← Back</button>
-    <h2>Social Media Manager</h2>
-    <p>Helping creators and brands plan, post, and grow strategically across platforms. Focused on engagement, content consistency, and storytelling that builds loyal communities.</p>
-  </div>
+  <section class="view hidden" id="social">
+    <button class="back-btn">← Back</button>
+    <h1>Social Media Manager</h1>
+    <p>I don’t just post content — I manage how your presence feels and performs. From planning and calendars to consistency and review, I help your content and strategy work together.</p>
+    <p>I support personal brands and businesses that want a structured, intentional online presence with content aligned to clear goals instead of random trends.</p>
+  </section>
 
-  <div id="hire-me" class="page hidden">
-    <button class="back-btn" onclick="goBack()">← Back</button>
-    <h2>Hire Me</h2>
+  <section class="view hidden" id="hire">
+    <button class="back-btn">← Back</button>
+    <h1>Hire Me</h1>
+    <p>Tell me what you need and I’ll help you choose the right direction. Select a service, share what you’re working on, and I’ll get back to you with next steps.</p>
     <form action="https://formspree.io/f/xnnlqkdl" method="POST">
-      <label>Select Service:</label>
-      <select name="service">
+      <select name="service" required>
+        <option value="">Select a Service</option>
         <option value="Video Editing">Video Editing</option>
         <option value="Content Creation">Content Creation</option>
         <option value="Social Media Management">Social Media Management</option>
       </select>
-
-      <label>Email:</label>
-      <input type="email" name="_replyto" required />
-
-      <label>Tell me about your idea or what you feel:</label>
-      <textarea name="message" required></textarea>
-
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Tell me about your idea or what you feel" required></textarea>
       <button type="submit">Send</button>
     </form>
-  </div>
-
-  <footer>
-    <p>© 2025 SirPaul Entertainment</p>
-    <div class="social-links">
-      <a href="https://www.instagram.com/sirpaulentertainment/" target="_blank">Instagram</a> |
-      <a href="https://www.linkedin.com/in/sirpaul-54b52a350" target="_blank">LinkedIn</a>
-    </div>
-  </footer>
+  </section>
 
   <script src="script.js"></script>
 </body>
