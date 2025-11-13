@@ -1,172 +1,354 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SirPaulEntertainment</title>
 
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  color: #fff;
-  background: linear-gradient(135deg, #ff1e6f, #913dfa);
-  background-size: 300% 300%;
-  animation: flow 8s ease infinite;
-  height: 100vh;
-  overflow: hidden;
-}
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
 
-/* ===== Gradient Flow ===== */
-@keyframes flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <!-- ============ HOME / HERO VIEW ============ -->
+    <main class="view hero view--active" id="view-home">
+      <div class="hero-inner">
+        <!-- Cloud glow -->
+        <div class="hero-cloud"></div>
 
-/* ===== Intro ===== */
-.intro {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: black;
-  z-index: 10;
-  flex-direction: column;
-}
+        <!-- Top-left About Me button -->
+        <button
+          class="liquid-btn hero-about-btn"
+          type="button"
+          data-target="view-about"
+        >
+          About Me
+        </button>
 
-.cloud {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  background: radial-gradient(white 0%, transparent 70%);
-  filter: blur(60px);
-  opacity: 0;
-  animation: cloudFade 2s ease forwards;
-}
+        <!-- Center content -->
+        <div class="hero-center">
+          <h1 class="hero-title" id="heroTitle"></h1>
 
-.intro-logo {
-  font-family: 'Anton', sans-serif;
-  font-size: 4rem;
-  letter-spacing: 2px;
-  opacity: 0;
-  transform: scale(0.9);
-  animation: logoReveal 3s 1s ease forwards;
-}
+          <p class="hero-subtitle hero-subtitle-text" id="heroSubtitle">
+            Blending creativity, storytelling, and strategy.
+          </p>
 
-@keyframes cloudFade {
-  0% { opacity: 0; transform: scale(0.5); }
-  50% { opacity: 1; transform: scale(1.3); }
-  100% { opacity: 0; transform: scale(2); }
-}
+          <div class="role-buttons" id="roleButtons">
+            <button
+              class="liquid-btn"
+              type="button"
+              data-target="view-content"
+            >
+              Content Creator
+            </button>
+            <button
+              class="liquid-btn"
+              type="button"
+              data-target="view-video"
+            >
+              Video Editor
+            </button>
+            <button
+              class="liquid-btn"
+              type="button"
+              data-target="view-social"
+            >
+              Social Media Manager
+            </button>
+          </div>
 
-@keyframes logoReveal {
-  0% { opacity: 0; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.05); }
-  100% { opacity: 1; transform: scale(1); }
-}
+          <button
+            class="liquid-btn primary hero-cta"
+            id="hireButton"
+            type="button"
+            data-target="view-hire"
+          >
+            Hire Me
+          </button>
+        </div>
+      </div>
+    </main>
 
-/* ===== Main Page ===== */
-.hidden { display: none; }
+    <!-- ============ ABOUT ME VIEW ============ -->
+    <main class="view" id="view-about">
+      <div class="view-inner">
+        <button
+          class="liquid-btn back-btn"
+          type="button"
+          data-target="view-home"
+        >
+          Back
+        </button>
 
-.main-content {
-  text-align: center;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+        <section class="content-block">
+          <h1 class="view-title">About Me</h1>
+          <p class="view-subtext">
+            I’m SirPaul, a video–first creator obsessed with rhythm, emotion,
+            and detail. I don’t just make content — I shape moments into
+            stories people remember.
+          </p>
+          <p class="view-subtext">
+            Over the last few years I’ve edited for brands, creators, and
+            startups that care about how they show up online. From quick-fire
+            UGC to cinematic cuts, I focus on three things:
+            <strong>clarity, emotion, and conversion.</strong>
+          </p>
+          <p class="view-subtext">
+            I understand both sides of the game: the creative that stops the
+            scroll, and the strategy that keeps people watching. Every frame
+            has a job. Every cut has a reason.
+          </p>
+          <p class="view-subtext">
+            If you’re looking for someone who simply follows instructions, I’m
+            not your guy. If you want someone who treats your idea like their
+            own and thinks in hooks, pacing, and outcomes — that’s where I come
+            in.
+          </p>
+        </section>
+      </div>
+    </main>
 
-.about-btn {
-  position: absolute;
-  top: 20px;
-  left: 25px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  background: none;
-  border: 2px solid white;
-  border-radius: 8px;
-  color: white;
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.about-btn:hover { background: rgba(255,255,255,0.2); }
+    <!-- ============ CONTENT CREATOR VIEW ============ -->
+    <main class="view" id="view-content">
+      <div class="view-inner">
+        <button
+          class="liquid-btn back-btn"
+          type="button"
+          data-target="view-home"
+        >
+          Back
+        </button>
 
-.center-content { margin-top: 50px; }
+        <section class="content-block">
+          <h1 class="view-title">Content Creator</h1>
+          <p class="view-subtext">
+            I create content that feels human, not manufactured. From vertical
+            short-form videos to full campaign series, I help you develop
+            concepts, shape hooks, and tell stories that fit your voice and
+            your audience.
+          </p>
+          <p class="view-subtext">
+            I work with personal brands, creators, and startups that want a
+            consistent, cinematic feel — content that looks good, sounds clear,
+            and moves people to action.
+          </p>
 
-.roles {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 25px;
-}
+          <div class="video-grid">
+            <!-- Replace these placeholders with iframes or video tags later -->
+            <div class="video-placeholder">Content Video 1</div>
+            <div class="video-placeholder">Content Video 2</div>
+            <div class="video-placeholder">Content Video 3</div>
+          </div>
+        </section>
+      </div>
+    </main>
 
-.role-btn, .hire-btn {
-  background: rgba(255,255,255,0.1);
-  border: 2px solid white;
-  color: white;
-  padding: 12px 24px;
-  font-family: 'Anton', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.role-btn:hover, .hire-btn:hover {
-  background: white;
-  color: #913dfa;
-}
+    <!-- ============ VIDEO EDITOR VIEW ============ -->
+    <main class="view" id="view-video">
+      <div class="view-inner">
+        <button
+          class="liquid-btn back-btn"
+          type="button"
+          data-target="view-home"
+        >
+          Back
+        </button>
 
-/* ===== Views ===== */
-.view {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg, #ff1e6f, #913dfa);
-  padding: 60px 20px;
-  overflow-y: auto;
-  text-align: center;
-}
+        <section class="content-block">
+          <h1 class="view-title">Video Editor</h1>
+          <p class="view-subtext">
+            Clean cuts. Precise pacing. Story at the center. I specialise in
+            editing UGC, TikTok/Reels, brand ads, cinematic pieces, and product
+            videos with a focus on keeping viewers watching and making the
+            message unforgettable.
+          </p>
+          <p class="view-subtext">
+            From rough footage to final export, I handle cuts, pacing, sound
+            design, basic VFX, color mood, and final polish. You bring the
+            vision — I turn it into something people want to watch again.
+          </p>
 
-.view h1 {
-  font-family: 'Anton', sans-serif;
-  font-size: 2.2rem;
-  margin-bottom: 15px;
-}
+          <div class="video-grid">
+            <!-- Replace these placeholders with your actual videos -->
+            <div class="video-placeholder">Edit 1</div>
+            <div class="video-placeholder">Edit 2</div>
+            <div class="video-placeholder">Edit 3</div>
+          </div>
+        </section>
+      </div>
+    </main>
 
-.view p {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  margin: 10px auto;
-  max-width: 600px;
-}
+    <!-- ============ SOCIAL MEDIA MANAGER VIEW ============ -->
+    <main class="view" id="view-social">
+      <div class="view-inner">
+        <button
+          class="liquid-btn back-btn"
+          type="button"
+          data-target="view-home"
+        >
+          Back
+        </button>
 
-.back-btn {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background: none;
-  border: 2px solid white;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+        <section class="content-block">
+          <h1 class="view-title">Social Media Manager</h1>
+          <p class="view-subtext">
+            I don’t just post content — I manage how your presence feels and
+            performs. From planning and calendars to consistency and review, I
+            help your content and strategy work together.
+          </p>
+          <p class="view-subtext">
+            I support personal brands and businesses that want a structured,
+            intentional online presence, with content aligned to clear goals
+            instead of random trends.
+          </p>
 
-footer {
-  position: absolute;
-  bottom: 10px;
-  text-align: center;
-}
+          <div class="video-grid">
+            <!-- Could be case studies, stat visuals, or videos -->
+            <div class="video-placeholder">Social Proof 1</div>
+            <div class="video-placeholder">Social Proof 2</div>
+            <div class="video-placeholder">Social Proof 3</div>
+          </div>
+        </section>
+      </div>
+    </main>
 
-.social-links a {
-  margin: 0 8px;
-  color: white;
-  text-decoration: none;
-}
-.social-links a:hover { text-decoration: underline; }
+    <!-- ============ HIRE ME VIEW ============ -->
+    <main class="view" id="view-hire">
+      <div class="view-inner">
+        <button
+          class="liquid-btn back-btn"
+          type="button"
+          data-target="view-home"
+        >
+          Back
+        </button>
 
-/* ===== Responsive ===== */
-@media (max-width: 600px) {
-  .about-btn { top: 10px; left: 10px; }
-  .intro-logo { font-size: 2.8rem; }
-}
+        <section class="content-block">
+          <h1 class="view-title">Hire Me</h1>
+          <p class="view-subtext">
+            Tell me what you need and I’ll help you choose the right direction.
+            Select a service, share what you’re working on, and I’ll get back
+            to you with next steps.
+          </p>
+
+          <form
+            class="hire-form"
+            action="https://formspree.io/f/xnnlqkdl"
+            method="POST"
+          >
+            <div class="form-row">
+              <label class="form-label" for="service">Service</label>
+              <select class="form-input" name="service" id="service" required>
+                <option value="" disabled selected>
+                  Choose the service you need
+                </option>
+                <option value="Video Editing">Video Editing</option>
+                <option value="Content Creation">Content Creation</option>
+                <option value="Social Media Management">
+                  Social Media Management
+                </option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="email">Email</label>
+              <input
+                class="form-input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="message">Message</label>
+              <textarea
+                class="form-input form-textarea"
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Tell me about your idea, what you feel, and what you’re trying to achieve. You can also share any references or links."
+                required
+              ></textarea>
+            </div>
+
+            <button class="liquid-btn primary" type="submit">
+              Send Request
+            </button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <p class="footer-copy">© 2025 SirPaulEntertainment</p>
+        <div class="footer-socials">
+          <a
+            href="https://www.instagram.com/sirpaulentertainment/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram - SirPaulEntertainment"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+              alt="Instagram"
+            />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/sirpaul-54b52a350?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn - SirPaul"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
+              alt="LinkedIn"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- SVG filter for liquid glass distortion -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="0"
+    height="0"
+    style="position: absolute; overflow: hidden"
+  >
+    <defs>
+      <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.008 0.008"
+          numOctaves="2"
+          seed="92"
+          result="noise"
+        />
+        <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="blurred"
+          scale="65"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Script -->
+  <script src="script.js" defer></script>
+</body>
+</html>
