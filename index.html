@@ -1,88 +1,492 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SirPaul</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <!-- ===== INTRO ===== -->
-  <div class="intro">
-    <div class="cloud"></div>
-    <h1 class="intro-logo">SirPaul</h1>
-  </div>
+:root {
+  --shadow-offset: 0px;
+  --shadow-blur: 18px;
+  --shadow-spread: -6px;
+  --shadow-color: rgba(255, 255, 255, 0.7);
+  --tint-color: 255, 255, 255;
+  --tint-opacity: 0.18;
+  --frost-blur: 16px;
+}
 
-  <!-- ===== MAIN PAGE ===== -->
-  <div class="main-content hidden">
-    <button class="about-btn" data-target="about">About Me</button>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    <div class="center-content">
-      <div class="roles">
-        <button class="role-btn" data-target="content">Content Creator</button>
-        <button class="role-btn" data-target="video">Video Editor</button>
-        <button class="role-btn" data-target="social">Social Media Manager</button>
-      </div>
-      <button class="hire-btn" data-target="hire">Hire Me</button>
-    </div>
+html,
+body {
+  height: 100%;
+}
 
-    <footer>
-      <p>© SirPaulEntertainment</p>
-      <div class="social-links">
-        <a href="https://www.instagram.com/sirpaulentertainment/" target="_blank">Instagram</a>
-        <a href="https://www.linkedin.com/in/sirpaul-54b52a350?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank">LinkedIn</a>
-      </div>
-    </footer>
-  </div>
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #f9fafb;
 
-  <!-- ===== SECTIONS (use subtext from old version) ===== -->
-  <section class="view hidden" id="about">
-    <button class="back-btn">← Back</button>
-    <h1>About Me</h1>
-    <p>I’m SirPaul, a video–first creator obsessed with rhythm, emotion, and detail. I don’t just make content — I shape moments into stories people remember.</p>
-    <p>Over the last few years I’ve edited for brands, creators, and startups that care about how they show up online. From quick-fire UGC to cinematic cuts, I focus on three things: <strong>clarity, emotion, and conversion.</strong></p>
-    <p>I understand both sides of the game: the creative that stops the scroll, and the strategy that keeps people watching. Every frame has a job. Every cut has a reason.</p>
-    <p>If you’re looking for someone who simply follows instructions, I’m not your guy. If you want someone who treats your idea like their own and thinks in hooks, pacing, and outcomes — that’s where I come in.</p>
-  </section>
+  /* flowing gradient #ff1e6f → #913dfa */
+  background: linear-gradient(135deg, #ff1e6f 0%, #913dfa 100%);
+  background-size: 260% 260%;
+  animation: gradientFlow 18s ease-in-out infinite alternate;
 
-  <section class="view hidden" id="content">
-    <button class="back-btn">← Back</button>
-    <h1>Content Creator</h1>
-    <p>I create content that feels human, not manufactured. From vertical short-form videos to full campaign series, I help you develop concepts, shape hooks, and tell stories that fit your voice and audience.</p>
-    <p>I work with personal brands, creators, and startups that want a consistent, cinematic feel — content that looks good, sounds clear, and moves people to action.</p>
-  </section>
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  overflow-x: hidden;
+}
 
-  <section class="view hidden" id="video">
-    <button class="back-btn">← Back</button>
-    <h1>Video Editor</h1>
-    <p>Clean cuts. Precise pacing. Story at the center. I specialise in editing UGC, TikTok/Reels, brand ads, cinematic pieces, and product videos that keep viewers watching and make the message unforgettable.</p>
-    <p>From rough footage to final export, I handle cuts, pacing, sound design, basic VFX, color mood, and final polish. You bring the vision — I turn it into something people want to watch again.</p>
-  </section>
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
 
-  <section class="view hidden" id="social">
-    <button class="back-btn">← Back</button>
-    <h1>Social Media Manager</h1>
-    <p>I don’t just post content — I manage how your presence feels and performs. From planning and calendars to consistency and review, I help your content and strategy work together.</p>
-    <p>I support personal brands and businesses that want a structured, intentional online presence with content aligned to clear goals instead of random trends.</p>
-  </section>
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  <section class="view hidden" id="hire">
-    <button class="back-btn">← Back</button>
-    <h1>Hire Me</h1>
-    <p>Tell me what you need and I’ll help you choose the right direction. Select a service, share what you’re working on, and I’ll get back to you with next steps.</p>
-    <form action="https://formspree.io/f/xnnlqkdl" method="POST">
-      <select name="service" required>
-        <option value="">Select a Service</option>
-        <option value="Video Editing">Video Editing</option>
-        <option value="Content Creation">Content Creation</option>
-        <option value="Social Media Management">Social Media Management</option>
-      </select>
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Tell me about your idea or what you feel" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </section>
+/* ============ VIEWS ============ */
 
-  <script src="script.js"></script>
-</body>
-</html>
+.view {
+  display: none;
+  flex: 1;
+  padding: 24px 20px 40px;
+}
+
+.view--active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-inner {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 16px 48px;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .view-inner {
+    padding: 56px 32px 64px;
+  }
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 24px 72px;
+}
+
+@media (min-width: 640px) {
+  .hero-inner {
+    padding: 140px 40px 80px;
+  }
+}
+
+/* ABOUT ME – glued to top-left */
+.hero-about-btn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+
+  opacity: 0;
+  pointer-events: none;
+
+  /* hidden a bit above the corner */
+  transform: translate(8px, -20px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+/* after intro: tiny margin from top-left */
+.hero--interactive .hero-about-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(8px, 6px); /* << super high, just 6px below the top bar */
+}
+
+/* CLOUD behind SirPaul */
+.hero-cloud {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* smoother, fluffy multi-lobed cloud – no blur filter */
+.hero-cloud::before {
+  content: "";
+  width: 360px;
+  height: 210px;
+  border-radius: 999px;
+
+  /* three overlapping soft circles to mimic your PNG */
+  background:
+    radial-gradient(circle at 20% 65%, #ffffff 0%, #ffffff 55%, transparent 70%),
+    radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 65%, transparent 80%),
+    radial-gradient(circle at 80% 65%, #ffffff 0%, #ffffff 55%, transparent 70%);
+
+  background-repeat: no-repeat;
+  background-size: 42% 72%, 58% 100%, 42% 72%;
+  background-position: 10% 70%, 50% 38%, 90% 70%;
+
+  /* soft shadow underneath */
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.35),
+    0 0 18px rgba(255, 255, 255, 0.9);
+
+  filter: none;
+
+  opacity: 0;
+  transform: translateY(8px) scale(0.9);
+  transition: opacity 450ms ease, transform 450ms ease;
+  animation: cloudFloat 7s ease-in-out infinite alternate;
+}
+
+/* cloud appears */
+.hero--cloud-visible .hero-cloud::before {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* keep it a little softer once everything has settled */
+.hero--settled .hero-cloud::before {
+  opacity: 0.9;
+}
+
+@keyframes cloudFloat {
+  0% {
+    transform: translateY(3px) scale(1);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+.hero-center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero--interactive .hero-center {
+  pointer-events: auto;
+}
+
+/* SirPaul title */
+.hero-title {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  letter-spacing: 0.12em;
+  text-transform: none; /* keep SirPaul case */
+  text-align: center;
+  text-shadow: 0 6px 14px rgba(15, 23, 42, 0.55);
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+
+.hero-title--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hero-title--top {
+  /* if you ever want to nudge it later, do it here */
+}
+
+/* subtitle */
+.hero-subtitle {
+  max-width: 360px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+.hero-subtitle-text {
+  font-family: "Montserrat", sans-serif;
+}
+
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.role-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+  margin-bottom: 22px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+@media (min-width: 640px) {
+  .role-buttons {
+    flex-direction: row;
+  }
+}
+
+.hero-cta {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+/* ============ LIQUID BUTTONS ============ */
+
+.liquid-btn {
+  position: relative;
+  border: none;
+  padding: 0.7rem 1.9rem;
+  border-radius: 999px;
+  background: transparent;
+  color: #f9fafb;
+  font-family: "Anton", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(var(--frost-blur));
+  -webkit-backdrop-filter: blur(var(--frost-blur));
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out,
+    opacity 180ms ease-out;
+  white-space: nowrap;
+}
+
+.liquid-btn::before,
+.liquid-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.liquid-btn::before {
+  background-color: rgba(var(--tint-color), var(--tint-opacity));
+  box-shadow: inset var(--shadow-offset) var(--shadow-offset)
+    var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
+}
+
+.liquid-btn::after {
+  backdrop-filter: blur(var(--frost-blur));
+  -webkit-backdrop-filter: blur(var(--frost-blur));
+  filter: url(#glass-distortion);
+  -webkit-filter: url("#glass-distortion");
+}
+
+.liquid-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.75);
+}
+
+.liquid-btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.7);
+}
+
+.liquid-btn.primary::before {
+  background: radial-gradient(
+    circle at 0% 0%,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.12)
+  );
+}
+
+/* BACK BUTTON IN SUBVIEWS */
+.back-btn {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+}
+
+/* ============ CONTENT VIEWS ============ */
+
+.view-title {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 56px;
+  margin-bottom: 14px;
+  text-shadow: 0 8px 20px rgba(15, 23, 42, 0.55);
+}
+
+.view-subtext {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  opacity: 0.94;
+  margin-bottom: 12px;
+  max-width: 640px;
+}
+
+/* video grid */
+.video-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .video-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.video-placeholder {
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-family: "Montserrat", sans-serif;
+  opacity: 0.85;
+}
+
+/* ============ HIRE FORM ============ */
+
+.hire-form {
+  margin-top: 28px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.form-input {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(15, 23, 42, 0.45);
+  color: #f9fafb;
+  outline: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.form-input::placeholder {
+  color: rgba(226, 232, 240, 0.8);
+}
+
+.form-input:focus {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* ============ FOOTER ============ */
+
+.footer {
+  width: 100%;
+  padding: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.footer-inner {
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 14px;
+}
+
+.footer-socials img {
+  width: 22px;
+  height: 22px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.5));
+}
+
+.footer-socials img:hover {
+  opacity: 1;
+  transform: translateY(-1px) scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
