@@ -96,7 +96,7 @@ body {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 120px 24px 72px; /* more space at top so About Me never overlaps */
+  padding: 120px 24px 72px; /* space so title never hits top */
 }
 
 @media (min-width: 640px) {
@@ -105,7 +105,7 @@ body {
   }
 }
 
-/* About Me – fixed in real top-left of the screen, hidden at first */
+/* About Me – fixed top-left, appears only after main animation */
 .hero-about-btn {
   position: fixed;
   top: 32px;
@@ -118,13 +118,11 @@ body {
   transition: opacity 500ms ease, transform 500ms ease;
 }
 
-/* When the hero is interactive (after SirPaul anim), fade it in */
+/* When hero becomes interactive, fade in About Me */
 .hero--interactive .hero-about-btn {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
-}
-
 }
 
 /* Cloud glow */
@@ -140,29 +138,35 @@ body {
 
 .hero-cloud::before {
   content: "";
-  width: 360px;
-  height: 360px;
+  width: 260px;
+  height: 260px;
   border-radius: 999px;
+
+  /* clearer cloud: bright center, soft edges */
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0.05)
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.5) 35%,
+    rgba(255, 255, 255, 0) 70%
   );
-  filter: blur(80px);
-  opacity: 0.0;             /* start invisible */
+
+  filter: blur(18px); /* not too blurry so it looks like a distinct cloud */
+  opacity: 0;
   transform: scale(0.9);
-  transition: opacity 800ms ease, transform 800ms ease;
+  transition: opacity 700ms ease, transform 700ms ease;
   animation: cloudPulse 8s ease-in-out infinite alternate;
 }
 
+/* cloud appears */
 .hero--cloud-visible .hero-cloud::before {
   opacity: 1;
   transform: scale(1);
 }
 
+/* after everything settles */
 .hero--settled .hero-cloud::before {
-  opacity: 0.5;
-  transform: scale(1.2);
+  opacity: 0.7;
+  transform: scale(1.05);
 }
 
 @keyframes cloudPulse {
@@ -180,7 +184,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px; /* more space between title, subtitle, buttons */
+  gap: 28px;
   text-align: center;
   pointer-events: none;
 }
@@ -208,9 +212,9 @@ body {
   transform: translateY(0) scale(1);
 }
 
-/* we keep this class name but don't move the title up anymore */
+/* We keep the class but don’t move much to avoid getting close to About Me */
 .hero-title--top {
-  /* no vertical shift to avoid getting close to About Me */
+  /* no extra transform needed – spacing comes from hero-inner padding */
 }
 
 .hero-subtitle {
@@ -320,7 +324,7 @@ body {
   );
 }
 
-/* Back button */
+/* Back button in subviews */
 .back-btn {
   position: absolute;
   top: 18px;
@@ -334,7 +338,7 @@ body {
   font-size: clamp(2rem, 3vw, 2.6rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-top: 56px; /* extra gap below back button */
+  margin-top: 56px; /* space under back button */
   margin-bottom: 14px;
   text-shadow: 0 8px 20px rgba(15, 23, 42, 0.55);
 }
@@ -488,5 +492,3 @@ body {
     text-align: center;
   }
 }
-
-
