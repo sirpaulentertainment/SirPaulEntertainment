@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const roleButtons = document.getElementById("roleButtons");
   const hireButton = document.getElementById("hireButton");
 
-  // ----------- SIMPLE VIEW SWITCHER -----------
   function showView(id) {
     views.forEach((v) => v.classList.remove("view--active"));
     const target = document.getElementById(id);
@@ -29,8 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ----------- HERO INTRO ANIMATION -----------
-  // Order: gradient -> cloud -> SirPaul -> subtitle + buttons + About Me
   function playHeroAnimation() {
     hero.classList.remove(
       "hero--settled",
@@ -44,18 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
     roleButtons.classList.remove("fade-in");
     hireButton.classList.remove("fade-in");
 
-    // STEP 0: cloud appears first (quick)
+    // cloud
     setTimeout(() => {
       hero.classList.add("hero--cloud-visible");
     }, 100);
 
-    // STEP 1: show "SirPaul" in the cloud
+    // SirPaul in the cloud
     setTimeout(() => {
       heroTitle.textContent = "SirPaul";
       heroTitle.classList.add("hero-title--visible");
     }, 800);
 
-    // STEP 2: fade into main layout (subtitle + buttons + About Me)
+    // full hero + About Me in corner
     setTimeout(() => {
       hero.classList.add("hero--settled");
       hero.classList.add("hero--interactive");
@@ -67,6 +64,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1500);
   }
 
-  // Initial load
   showView("view-home");
 });
