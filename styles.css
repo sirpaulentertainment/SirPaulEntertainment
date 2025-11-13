@@ -108,13 +108,13 @@ body {
 /* About Me – fixed top-left, appears only after main animation */
 .hero-about-btn {
   position: fixed;
-  top: 4px;  /* higher so it NEVER touches the title on phone */
-  left: 8px;
+  top: 0;     /* literally top-left of the screen */
+  left: 0;
   z-index: 20;
 
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-8px);
+  transform: translate(6px, -10px); /* tiny offset down/right when hidden */
   transition: opacity 500ms ease, transform 500ms ease;
 }
 
@@ -122,7 +122,7 @@ body {
 .hero--interactive .hero-about-btn {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translate(8px, 8px);  /* small margin from corner */
 }
 
 /* CLOUD container */
@@ -136,16 +136,30 @@ body {
   z-index: 0;
 }
 
-/* Use your PNG cloud */
+/* Pure CSS, crisp fluffy cloud */
 .hero-cloud::before {
   content: "";
   width: 320px;
-  height: 210px;
-  background: url("cloud.png") center/contain no-repeat;
+  height: 190px;
+  border-radius: 999px;
+
+  /* three circles combined into one cloud */
+  background:
+    radial-gradient(circle at 25% 65%, #ffffff 0%, #ffffff 45%, transparent 46%) ,
+    radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 50%, transparent 52%),
+    radial-gradient(circle at 75% 65%, #ffffff 0%, #ffffff 45%, transparent 46%);
+
+  background-repeat: no-repeat;
+  background-size: 40% 70%, 50% 100%, 40% 70%;
+  background-position: 15% 70%, 50% 40%, 85% 70%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  filter: none; /* absolutely NO blur */
+
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 700ms ease, transform 700ms ease;
-  animation: cloudFloat 8s ease-in-out infinite alternate;
+  transition: opacity 500ms ease, transform 500ms ease;
+  animation: cloudFloat 7s ease-in-out infinite alternate;
 }
 
 /* cloud appears */
@@ -154,19 +168,18 @@ body {
   transform: scale(1);
 }
 
-/* after everything settles */
+/* after everything settles, make it a bit softer */
 .hero--settled .hero-cloud::before {
-  opacity: 1;
-  transform: scale(1.02);
+  opacity: 0.75;
 }
 
-/* subtle float */
+/* subtle floating motion */
 @keyframes cloudFloat {
   0% {
-    transform: translateY(4px) scale(1);
+    transform: translateY(3px) scale(1);
   }
   100% {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-3px) scale(1.02);
   }
 }
 
@@ -190,13 +203,12 @@ body {
   font-family: "Anton", sans-serif;
   font-size: clamp(2.6rem, 5vw, 3.6rem);
   letter-spacing: 0.12em;
-  text-transform: none;   /* 🔥 keep exact case: SirPaul */
+  text-transform: none;   /* keep exact case: SirPaul */
   text-align: center;
-  text-shadow: 0 10px 28px rgba(15, 23, 42, 0.55);
+  text-shadow: 0 6px 14px rgba(15, 23, 42, 0.55);
   opacity: 0;
   transform: translateY(14px) scale(0.96);
-  transition: opacity 600ms ease, transform 600ms ease, letter-spacing 600ms ease,
-    font-size 600ms ease;
+  transition: opacity 500ms ease, transform 500ms ease;
 }
 
 .hero-title--visible {
@@ -205,7 +217,7 @@ body {
 }
 
 .hero-title--top {
-  /* spacing handled via hero-inner padding */
+  /* spacing is handled via hero-inner padding */
 }
 
 .hero-subtitle {
@@ -214,7 +226,7 @@ body {
   font-weight: 400;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 500ms ease, transform 500ms ease;
+  transition: opacity 400ms ease, transform 400ms ease;
 }
 
 .hero-subtitle-text {
@@ -234,7 +246,7 @@ body {
   margin-bottom: 22px;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 500ms ease, transform 500ms ease;
+  transition: opacity 400ms ease, transform 400ms ease;
 }
 
 @media (min-width: 640px) {
@@ -246,7 +258,7 @@ body {
 .hero-cta {
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 500ms ease, transform 500ms ease;
+  transition: opacity 400ms ease, transform 400ms ease;
 }
 
 /* ============ LIQUID GLASS BUTTON ============ */
