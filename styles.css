@@ -1,5 +1,4 @@
 :root {
-  /* Liquid glass variables */
   --shadow-offset: 0px;
   --shadow-blur: 18px;
   --shadow-spread: -6px;
@@ -7,8 +6,6 @@
   --tint-color: 255, 255, 255;
   --tint-opacity: 0.18;
   --frost-blur: 16px;
-  --noise-frequency: 0.008;
-  --distortion-strength: 65;
 }
 
 * {
@@ -28,7 +25,7 @@ body {
   flex-direction: column;
   color: #f9fafb;
 
-  /* 🔥 Flowing gradient between #ff1e6f and #913dfa */
+  /* flowing gradient #ff1e6f → #913dfa */
   background: linear-gradient(135deg, #ff1e6f 0%, #913dfa 100%);
   background-size: 260% 260%;
   animation: gradientFlow 18s ease-in-out infinite alternate;
@@ -56,7 +53,7 @@ body {
   flex-direction: column;
 }
 
-/* ============ VIEW LAYOUT ============ */
+/* ============ VIEWS ============ */
 
 .view {
   display: none;
@@ -105,27 +102,29 @@ body {
   }
 }
 
-/* About Me – fixed top-left, appears only after main animation */
+/* ABOUT ME – glued to top-left */
 .hero-about-btn {
   position: fixed;
-  top: 0;     /* literally top-left of the screen */
+  top: 0;
   left: 0;
   z-index: 20;
 
   opacity: 0;
   pointer-events: none;
-  transform: translate(6px, -10px); /* tiny offset down/right when hidden */
+
+  /* hidden a bit above the corner */
+  transform: translate(8px, -20px);
   transition: opacity 500ms ease, transform 500ms ease;
 }
 
-/* When hero becomes interactive, fade in About Me */
+/* after intro: tiny margin from top-left */
 .hero--interactive .hero-about-btn {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(8px, 8px);  /* small margin from corner */
+  transform: translate(8px, 6px); /* << super high, just 6px below the top bar */
 }
 
-/* CLOUD container */
+/* CLOUD behind SirPaul */
 .hero-cloud {
   position: absolute;
   inset: 0;
@@ -136,44 +135,47 @@ body {
   z-index: 0;
 }
 
-/* Pure CSS, crisp fluffy cloud */
+/* smoother, fluffy multi-lobed cloud – no blur filter */
 .hero-cloud::before {
   content: "";
-  width: 320px;
-  height: 190px;
+  width: 360px;
+  height: 210px;
   border-radius: 999px;
 
-  /* three circles combined into one cloud */
+  /* three overlapping soft circles to mimic your PNG */
   background:
-    radial-gradient(circle at 25% 65%, #ffffff 0%, #ffffff 45%, transparent 46%) ,
-    radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 50%, transparent 52%),
-    radial-gradient(circle at 75% 65%, #ffffff 0%, #ffffff 45%, transparent 46%);
+    radial-gradient(circle at 20% 65%, #ffffff 0%, #ffffff 55%, transparent 70%),
+    radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 65%, transparent 80%),
+    radial-gradient(circle at 80% 65%, #ffffff 0%, #ffffff 55%, transparent 70%);
 
   background-repeat: no-repeat;
-  background-size: 40% 70%, 50% 100%, 40% 70%;
-  background-position: 15% 70%, 50% 40%, 85% 70%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background-size: 42% 72%, 58% 100%, 42% 72%;
+  background-position: 10% 70%, 50% 38%, 90% 70%;
 
-  filter: none; /* absolutely NO blur */
+  /* soft shadow underneath */
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.35),
+    0 0 18px rgba(255, 255, 255, 0.9);
+
+  filter: none;
 
   opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 500ms ease, transform 500ms ease;
+  transform: translateY(8px) scale(0.9);
+  transition: opacity 450ms ease, transform 450ms ease;
   animation: cloudFloat 7s ease-in-out infinite alternate;
 }
 
 /* cloud appears */
 .hero--cloud-visible .hero-cloud::before {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0) scale(1);
 }
 
-/* after everything settles, make it a bit softer */
+/* keep it a little softer once everything has settled */
 .hero--settled .hero-cloud::before {
-  opacity: 0.75;
+  opacity: 0.9;
 }
 
-/* subtle floating motion */
 @keyframes cloudFloat {
   0% {
     transform: translateY(3px) scale(1);
@@ -198,17 +200,17 @@ body {
   pointer-events: auto;
 }
 
-/* Title & subtitle */
+/* SirPaul title */
 .hero-title {
   font-family: "Anton", sans-serif;
   font-size: clamp(2.6rem, 5vw, 3.6rem);
   letter-spacing: 0.12em;
-  text-transform: none;   /* keep exact case: SirPaul */
+  text-transform: none; /* keep SirPaul case */
   text-align: center;
   text-shadow: 0 6px 14px rgba(15, 23, 42, 0.55);
   opacity: 0;
   transform: translateY(14px) scale(0.96);
-  transition: opacity 500ms ease, transform 500ms ease;
+  transition: opacity 400ms ease, transform 400ms ease;
 }
 
 .hero-title--visible {
@@ -217,16 +219,17 @@ body {
 }
 
 .hero-title--top {
-  /* spacing is handled via hero-inner padding */
+  /* if you ever want to nudge it later, do it here */
 }
 
+/* subtitle */
 .hero-subtitle {
   max-width: 360px;
   font-size: 0.9rem;
   font-weight: 400;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 400ms ease, transform 400ms ease;
+  transition: opacity 350ms ease, transform 350ms ease;
 }
 
 .hero-subtitle-text {
@@ -246,7 +249,7 @@ body {
   margin-bottom: 22px;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 400ms ease, transform 400ms ease;
+  transition: opacity 350ms ease, transform 350ms ease;
 }
 
 @media (min-width: 640px) {
@@ -258,10 +261,10 @@ body {
 .hero-cta {
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 400ms ease, transform 400ms ease;
+  transition: opacity 350ms ease, transform 350ms ease;
 }
 
-/* ============ LIQUID GLASS BUTTON ============ */
+/* ============ LIQUID BUTTONS ============ */
 
 .liquid-btn {
   position: relative;
@@ -294,14 +297,12 @@ body {
   z-index: -1;
 }
 
-/* Tint + inner highlight */
 .liquid-btn::before {
   background-color: rgba(var(--tint-color), var(--tint-opacity));
   box-shadow: inset var(--shadow-offset) var(--shadow-offset)
     var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
 }
 
-/* Frosted / distorted */
 .liquid-btn::after {
   backdrop-filter: blur(var(--frost-blur));
   -webkit-backdrop-filter: blur(var(--frost-blur));
@@ -327,7 +328,7 @@ body {
   );
 }
 
-/* Back button in subviews */
+/* BACK BUTTON IN SUBVIEWS */
 .back-btn {
   position: absolute;
   top: 18px;
@@ -355,7 +356,7 @@ body {
   max-width: 640px;
 }
 
-/* Video / content grid */
+/* video grid */
 .video-grid {
   margin-top: 28px;
   display: grid;
@@ -468,12 +469,6 @@ body {
 .footer-socials {
   display: flex;
   gap: 14px;
-}
-
-.footer-socials a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .footer-socials img {
