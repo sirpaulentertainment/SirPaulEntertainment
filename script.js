@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const roleButtons = document.getElementById("roleButtons");
   const hireButton = document.getElementById("hireButton");
 
-  // Simple view switcher (single-page app)
   function showView(id) {
     views.forEach((v) => v.classList.remove("view--active"));
     const target = document.getElementById(id);
@@ -21,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Hook buttons with data-target to the view switcher
   document.querySelectorAll("[data-target]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const targetId = btn.getAttribute("data-target");
@@ -29,38 +27,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // HERO INTRO ANIMATION
+  // HERO INTRO ANIMATION – cloud first, then "SirPaul"
   function playHeroAnimation() {
-    hero.classList.remove("hero--settled", "hero--interactive");
+    hero.classList.remove(
+      "hero--settled",
+      "hero--interactive",
+      "hero--cloud-visible"
+    );
     heroTitle.textContent = "";
     heroSubtitle.classList.remove("fade-in");
     roleButtons.classList.remove("fade-in");
     hireButton.classList.remove("fade-in");
+    heroTitle.classList.remove("hero-title--visible");
+
+    // Step 0: show cloud glow
+    setTimeout(() => {
+      hero.classList.add("hero--cloud-visible");
+    }, 200);
 
     // Step 1: show "SirPaul"
     setTimeout(() => {
       heroTitle.textContent = "SirPaul";
       heroTitle.classList.add("hero-title--visible");
-    }, 400);
+    }, 1200);
 
-    // Step 2: morph into "SirPaulEntertainment"
-    setTimeout(() => {
-      heroTitle.classList.add("hero-title--morph");
-      heroTitle.textContent = "SirPaulEntertainment";
-    }, 1700);
-
-    // Step 3: move up and reveal subtitle + buttons
+    // Step 2: settle layout + show subtitle and buttons
     setTimeout(() => {
       hero.classList.add("hero--settled");
       hero.classList.add("hero--interactive");
       heroTitle.classList.add("hero-title--top");
-
       heroSubtitle.classList.add("fade-in");
       roleButtons.classList.add("fade-in");
       hireButton.classList.add("fade-in");
-    }, 3000);
+    }, 2200);
   }
 
-  // Initial load: show home + play animation once
+  // Initial load
   showView("view-home");
 });
