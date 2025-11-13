@@ -105,11 +105,26 @@ body {
   }
 }
 
-/* About Me button – clearly away from title */
+/* About Me – fixed in real top-left of the screen, hidden at first */
 .hero-about-btn {
-  position: absolute;
+  position: fixed;
   top: 32px;
-  left: 40px;
+  left: 20px;
+  z-index: 20;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+/* When the hero is interactive (after SirPaul anim), fade it in */
+.hero--interactive .hero-about-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 }
 
 /* Cloud glow */
