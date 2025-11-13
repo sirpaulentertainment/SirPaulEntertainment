@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (target) {
       target.classList.add("view--active");
       if (id === "view-home") {
-        // only play animation first time; no restart on back
         if (!hero.dataset.animationPlayed) {
           playHeroAnimation();
           hero.dataset.animationPlayed = "true";
