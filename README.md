@@ -1,1 +1,2 @@
-SirPaul Entertainment Portfolio Website\nEditable and responsive portfolio for SirPaul.
+SirPaul Entertainment Portfolio Website
+Editable and responsive portfolio for SirPaul.
