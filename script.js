@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const roleButtons = document.getElementById("roleButtons");
   const hireButton = document.getElementById("hireButton");
 
+  // ---------- VIEW SWITCHER ----------
   function showView(id) {
     views.forEach((v) => v.classList.remove("view--active"));
     const target = document.getElementById(id);
@@ -28,41 +29,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // ---------- HERO INTRO ----------
+  // SirPaul appears, slides up, then subtitle + buttons fade in
   function playHeroAnimation() {
-    hero.classList.remove(
-      "hero--settled",
-      "hero--interactive",
-      "hero--cloud-visible"
-    );
-
     heroTitle.textContent = "";
-    heroTitle.classList.remove("hero-title--visible", "hero-title--top");
+    heroTitle.classList.remove("hero-title--visible");
     heroSubtitle.classList.remove("fade-in");
     roleButtons.classList.remove("fade-in");
     hireButton.classList.remove("fade-in");
 
-    // cloud
-    setTimeout(() => {
-      hero.classList.add("hero--cloud-visible");
-    }, 100);
-
-    // SirPaul in the cloud
+    // 1) show text "SirPaul"
     setTimeout(() => {
       heroTitle.textContent = "SirPaul";
       heroTitle.classList.add("hero-title--visible");
-    }, 800);
+    }, 200);
 
-    // full hero + About Me in corner
+    // 2) fade in subtitle + buttons
     setTimeout(() => {
-      hero.classList.add("hero--settled");
-      hero.classList.add("hero--interactive");
-      heroTitle.classList.add("hero-title--top");
-
       heroSubtitle.classList.add("fade-in");
       roleButtons.classList.add("fade-in");
       hireButton.classList.add("fade-in");
-    }, 1500);
+    }, 900);
   }
 
+  // initial load
   showView("view-home");
 });
