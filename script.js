@@ -5,14 +5,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroSubtitle = document.getElementById("heroSubtitle");
   const roleButtons = document.getElementById("roleButtons");
 
+  const HOME_VIEW_ID = "view-home";
+  let currentViewId = HOME_VIEW_ID;
+
   // ---------- VIEW SWITCHER ----------
   function showView(id) {
     views.forEach((v) => v.classList.remove("view--active"));
+
     const target = document.getElementById(id);
     if (target) {
       target.classList.add("view--active");
+      currentViewId = id;
 
-      if (id === "view-home") {
+      // always jump to top when changing section
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+
+      // run hero intro only first time we go to home
+      if (id === HOME_VIEW_ID) {
         if (!hero.dataset.animationPlayed) {
           playHeroAnimation();
           hero.dataset.animationPlayed = "true";
@@ -21,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // hook up all buttons with data-target
   document.querySelectorAll("[data-target]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const targetId = btn.getAttribute("data-target");
@@ -49,6 +63,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 900);
   }
 
+  // ---------- SWIPE BACK (MOBILE) ----------
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  document.addEventListener(
+    "touchstart",
+    (e) => {
+      if (e.touches.length !== 1) return;
+      const t = e.touches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      touchStartTime = Date.now();
+    },
+    { passive: true }
+  );
+
+  document.addEventListener(
+    "touchend",
+    (e) => {
+      if (e.changedTouches.length !== 1) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      const dt = Date.now() - touchStartTime;
+
+      // only swipe-back when not on home
+      if (currentViewId === HOME_VIEW_ID) return;
+
+      // basic swipe-right detection
+      const MIN_DISTANCE = 80; // px
+      const MAX_VERTICAL = 60; // px
+      const MAX_TIME = 600; // ms
+
+      if (dt < MAX_TIME && dx > MIN_DISTANCE && Math.abs(dy) < MAX_VERTICAL) {
+        // go back to main hero view
+        showView(HOME_VIEW_ID);
+      }
+    },
+    { passive: true }
+  );
+
   // initial load
-  showView("view-home");
+  showView(HOME_VIEW_ID);
 });
