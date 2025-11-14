@@ -102,89 +102,17 @@ body {
   }
 }
 
-/* ABOUT ME – glued to top-left */
+/* ABOUT ME – main menu button at true top-left */
 .hero-about-btn {
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 20;
-
-  opacity: 0;
-  pointer-events: none;
-
-  /* hidden a bit above the corner */
-  transform: translate(8px, -20px);
-  transition: opacity 500ms ease, transform 500ms ease;
+  top: 8px;          /* very high */
+  left: 12px;        /* small margin from edge */
+  z-index: 30;
 }
 
-/* after intro: tiny margin from top-left */
-.hero--interactive .hero-about-btn {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(8px, 6px); /* << super high, just 6px below the top bar */
-}
+/* no cloud anymore */
 
-/* CLOUD behind SirPaul */
-.hero-cloud {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* smoother, fluffy multi-lobed cloud – no blur filter */
-.hero-cloud::before {
-  content: "";
-  width: 360px;
-  height: 210px;
-  border-radius: 999px;
-
-  /* three overlapping soft circles to mimic your PNG */
-  background:
-    radial-gradient(circle at 20% 65%, #ffffff 0%, #ffffff 55%, transparent 70%),
-    radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 65%, transparent 80%),
-    radial-gradient(circle at 80% 65%, #ffffff 0%, #ffffff 55%, transparent 70%);
-
-  background-repeat: no-repeat;
-  background-size: 42% 72%, 58% 100%, 42% 72%;
-  background-position: 10% 70%, 50% 38%, 90% 70%;
-
-  /* soft shadow underneath */
-  box-shadow:
-    0 14px 32px rgba(0, 0, 0, 0.35),
-    0 0 18px rgba(255, 255, 255, 0.9);
-
-  filter: none;
-
-  opacity: 0;
-  transform: translateY(8px) scale(0.9);
-  transition: opacity 450ms ease, transform 450ms ease;
-  animation: cloudFloat 7s ease-in-out infinite alternate;
-}
-
-/* cloud appears */
-.hero--cloud-visible .hero-cloud::before {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* keep it a little softer once everything has settled */
-.hero--settled .hero-cloud::before {
-  opacity: 0.9;
-}
-
-@keyframes cloudFloat {
-  0% {
-    transform: translateY(3px) scale(1);
-  }
-  100% {
-    transform: translateY(-3px) scale(1.02);
-  }
-}
-
+/* hero center stack */
 .hero-center {
   position: relative;
   z-index: 1;
@@ -193,11 +121,6 @@ body {
   align-items: center;
   gap: 28px;
   text-align: center;
-  pointer-events: none;
-}
-
-.hero--interactive .hero-center {
-  pointer-events: auto;
 }
 
 /* SirPaul title */
@@ -208,18 +131,16 @@ body {
   text-transform: none; /* keep SirPaul case */
   text-align: center;
   text-shadow: 0 6px 14px rgba(15, 23, 42, 0.55);
+
   opacity: 0;
-  transform: translateY(14px) scale(0.96);
+  transform: translateY(24px); /* start lower */
   transition: opacity 400ms ease, transform 400ms ease;
 }
 
+/* slide up + fade in */
 .hero-title--visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.hero-title--top {
-  /* if you ever want to nudge it later, do it here */
+  transform: translateY(-6px); /* ends slightly above center */
 }
 
 /* subtitle */
@@ -241,6 +162,7 @@ body {
   transform: translateY(0) !important;
 }
 
+/* role buttons row */
 .role-buttons {
   display: flex;
   flex-direction: column;
@@ -255,16 +177,23 @@ body {
 @media (min-width: 640px) {
   .role-buttons {
     flex-direction: row;
+    justify-content: center;
   }
 }
 
+/* Hire Me centered under row */
 .hero-cta {
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 350ms ease, transform 350ms ease;
+
+  display: flex;           /* center the button perfectly */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-/* ============ LIQUID BUTTONS ============ */
+/* ============ LIQUID GLASS BUTTONS ============ */
 
 .liquid-btn {
   position: relative;
