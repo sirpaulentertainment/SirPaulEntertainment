@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroTitle = document.getElementById("heroTitle");
   const heroSubtitle = document.getElementById("heroSubtitle");
   const roleButtons = document.getElementById("roleButtons");
-  const hireButton = document.getElementById("hireButton");
 
   // ---------- VIEW SWITCHER ----------
   function showView(id) {
@@ -30,15 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ---------- HERO INTRO ----------
-  // SirPaul appears first, then About Me + subtitle + buttons
+  // SirPaul appears first, then subtitle + ALL buttons
   function playHeroAnimation() {
-    hero.classList.remove("hero--interactive");
-
     heroTitle.textContent = "";
     heroTitle.classList.remove("hero-title--visible");
     heroSubtitle.classList.remove("fade-in");
     roleButtons.classList.remove("fade-in");
-    hireButton.classList.remove("fade-in");
 
     // 1) SirPaul
     setTimeout(() => {
@@ -46,12 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
       heroTitle.classList.add("hero-title--visible");
     }, 200);
 
-    // 2) Everything else (About Me, subtitle, buttons)
+    // 2) Subtitle + both rows of buttons
     setTimeout(() => {
-      hero.classList.add("hero--interactive"); // this shows About Me in top-left
       heroSubtitle.classList.add("fade-in");
       roleButtons.classList.add("fade-in");
-      hireButton.classList.add("fade-in");
     }, 900);
   }
 
