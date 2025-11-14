@@ -102,30 +102,6 @@ body {
   }
 }
 
-/* ABOUT ME – main menu top-left, appears AFTER SirPaul */
-.hero-about-btn {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 30;
-
-  opacity: 0;
-  pointer-events: none;
-
-  /* start just above the corner */
-  transform: translate(16px, -20px);
-  transition: opacity 350ms ease, transform 350ms ease;
-}
-
-/* when hero is interactive (after SirPaul) */
-.hero--interactive .hero-about-btn {
-  opacity: 1;
-  pointer-events: auto;
-  /* small margin from viewport edge */
-  transform: translate(16px, 10px);
-}
-
-/* hero center stack */
 .hero-center {
   position: relative;
   z-index: 1;
@@ -158,7 +134,7 @@ body {
 
 /* subtitle */
 .hero-subtitle {
-  max-width: 360px;
+  max-width: 420px;
   font-size: 0.9rem;
   font-weight: 400;
   opacity: 0;
@@ -175,35 +151,39 @@ body {
   transform: translateY(0) !important;
 }
 
-/* role buttons row */
+/* ============ HERO BUTTON LAYOUT ============ */
+
 .role-buttons {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 10px;
-  margin-bottom: 22px;
+  gap: 18px;
+  margin-top: 12px;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 350ms ease, transform 350ms ease;
 }
 
-@media (min-width: 640px) {
-  .role-buttons {
-    flex-direction: row;
-    justify-content: center; /* center row */
-  }
-}
-
-/* Hire Me centered under row */
-.hero-cta {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 350ms ease, transform 350ms ease;
-
+/* row of 3 on desktop, stacked on phone */
+.role-buttons-top {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
   align-items: center;
-  width: 100%; /* center under the three buttons and SirPaul */
+}
+
+/* bottom row: about + hire */
+.role-buttons-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 18px;
+}
+
+@media (min-width: 768px) {
+  .role-buttons-top {
+    flex-direction: row;        /* three in a row */
+    justify-content: center;
+  }
 }
 
 /* ============ LIQUID GLASS BUTTONS ============ */
