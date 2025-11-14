@@ -1,354 +1,492 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SirPaulEntertainment</title>
+:root {
+  --shadow-offset: 0px;
+  --shadow-blur: 18px;
+  --shadow-spread: -6px;
+  --shadow-color: rgba(255, 255, 255, 0.7);
+  --tint-color: 255, 255, 255;
+  --tint-opacity: 0.18;
+  --frost-blur: 16px;
+}
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="page">
-    <!-- ============ HOME / HERO VIEW ============ -->
-    <main class="view hero view--active" id="view-home">
-      <div class="hero-inner">
-        <!-- Cloud glow -->
-        <div class="hero-cloud"></div>
+html,
+body {
+  height: 100%;
+}
 
-        <!-- Top-left About Me button -->
-        <button
-          class="liquid-btn hero-about-btn"
-          type="button"
-          data-target="view-about"
-        >
-          About Me
-        </button>
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #f9fafb;
 
-        <!-- Center content -->
-        <div class="hero-center">
-          <h1 class="hero-title" id="heroTitle"></h1>
+  /* flowing gradient #ff1e6f → #913dfa */
+  background: linear-gradient(135deg, #ff1e6f 0%, #913dfa 100%);
+  background-size: 260% 260%;
+  animation: gradientFlow 18s ease-in-out infinite alternate;
 
-          <p class="hero-subtitle hero-subtitle-text" id="heroSubtitle">
-            Blending creativity, storytelling, and strategy.
-          </p>
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  overflow-x: hidden;
+}
 
-          <div class="role-buttons" id="roleButtons">
-            <button
-              class="liquid-btn"
-              type="button"
-              data-target="view-content"
-            >
-              Content Creator
-            </button>
-            <button
-              class="liquid-btn"
-              type="button"
-              data-target="view-video"
-            >
-              Video Editor
-            </button>
-            <button
-              class="liquid-btn"
-              type="button"
-              data-target="view-social"
-            >
-              Social Media Manager
-            </button>
-          </div>
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
 
-          <button
-            class="liquid-btn primary hero-cta"
-            id="hireButton"
-            type="button"
-            data-target="view-hire"
-          >
-            Hire Me
-          </button>
-        </div>
-      </div>
-    </main>
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    <!-- ============ ABOUT ME VIEW ============ -->
-    <main class="view" id="view-about">
-      <div class="view-inner">
-        <button
-          class="liquid-btn back-btn"
-          type="button"
-          data-target="view-home"
-        >
-          Back
-        </button>
+/* ============ VIEWS ============ */
 
-        <section class="content-block">
-          <h1 class="view-title">About Me</h1>
-          <p class="view-subtext">
-            I’m SirPaul, a video–first creator obsessed with rhythm, emotion,
-            and detail. I don’t just make content — I shape moments into
-            stories people remember.
-          </p>
-          <p class="view-subtext">
-            Over the last few years I’ve edited for brands, creators, and
-            startups that care about how they show up online. From quick-fire
-            UGC to cinematic cuts, I focus on three things:
-            <strong>clarity, emotion, and conversion.</strong>
-          </p>
-          <p class="view-subtext">
-            I understand both sides of the game: the creative that stops the
-            scroll, and the strategy that keeps people watching. Every frame
-            has a job. Every cut has a reason.
-          </p>
-          <p class="view-subtext">
-            If you’re looking for someone who simply follows instructions, I’m
-            not your guy. If you want someone who treats your idea like their
-            own and thinks in hooks, pacing, and outcomes — that’s where I come
-            in.
-          </p>
-        </section>
-      </div>
-    </main>
+.view {
+  display: none;
+  flex: 1;
+  padding: 24px 20px 40px;
+}
 
-    <!-- ============ CONTENT CREATOR VIEW ============ -->
-    <main class="view" id="view-content">
-      <div class="view-inner">
-        <button
-          class="liquid-btn back-btn"
-          type="button"
-          data-target="view-home"
-        >
-          Back
-        </button>
+.view--active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        <section class="content-block">
-          <h1 class="view-title">Content Creator</h1>
-          <p class="view-subtext">
-            I create content that feels human, not manufactured. From vertical
-            short-form videos to full campaign series, I help you develop
-            concepts, shape hooks, and tell stories that fit your voice and
-            your audience.
-          </p>
-          <p class="view-subtext">
-            I work with personal brands, creators, and startups that want a
-            consistent, cinematic feel — content that looks good, sounds clear,
-            and moves people to action.
-          </p>
+.view-inner {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 16px 48px;
+  position: relative;
+}
 
-          <div class="video-grid">
-            <!-- Replace these placeholders with iframes or video tags later -->
-            <div class="video-placeholder">Content Video 1</div>
-            <div class="video-placeholder">Content Video 2</div>
-            <div class="video-placeholder">Content Video 3</div>
-          </div>
-        </section>
-      </div>
-    </main>
+@media (min-width: 640px) {
+  .view-inner {
+    padding: 56px 32px 64px;
+  }
+}
 
-    <!-- ============ VIDEO EDITOR VIEW ============ -->
-    <main class="view" id="view-video">
-      <div class="view-inner">
-        <button
-          class="liquid-btn back-btn"
-          type="button"
-          data-target="view-home"
-        >
-          Back
-        </button>
+/* ============ HERO ============ */
 
-        <section class="content-block">
-          <h1 class="view-title">Video Editor</h1>
-          <p class="view-subtext">
-            Clean cuts. Precise pacing. Story at the center. I specialise in
-            editing UGC, TikTok/Reels, brand ads, cinematic pieces, and product
-            videos with a focus on keeping viewers watching and making the
-            message unforgettable.
-          </p>
-          <p class="view-subtext">
-            From rough footage to final export, I handle cuts, pacing, sound
-            design, basic VFX, color mood, and final polish. You bring the
-            vision — I turn it into something people want to watch again.
-          </p>
+.hero {
+  position: relative;
+  overflow: hidden;
+}
 
-          <div class="video-grid">
-            <!-- Replace these placeholders with your actual videos -->
-            <div class="video-placeholder">Edit 1</div>
-            <div class="video-placeholder">Edit 2</div>
-            <div class="video-placeholder">Edit 3</div>
-          </div>
-        </section>
-      </div>
-    </main>
+.hero-inner {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 24px 72px;
+}
 
-    <!-- ============ SOCIAL MEDIA MANAGER VIEW ============ -->
-    <main class="view" id="view-social">
-      <div class="view-inner">
-        <button
-          class="liquid-btn back-btn"
-          type="button"
-          data-target="view-home"
-        >
-          Back
-        </button>
+@media (min-width: 640px) {
+  .hero-inner {
+    padding: 140px 40px 80px;
+  }
+}
 
-        <section class="content-block">
-          <h1 class="view-title">Social Media Manager</h1>
-          <p class="view-subtext">
-            I don’t just post content — I manage how your presence feels and
-            performs. From planning and calendars to consistency and review, I
-            help your content and strategy work together.
-          </p>
-          <p class="view-subtext">
-            I support personal brands and businesses that want a structured,
-            intentional online presence, with content aligned to clear goals
-            instead of random trends.
-          </p>
+/* ABOUT ME – glued to top-left */
+.hero-about-btn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
 
-          <div class="video-grid">
-            <!-- Could be case studies, stat visuals, or videos -->
-            <div class="video-placeholder">Social Proof 1</div>
-            <div class="video-placeholder">Social Proof 2</div>
-            <div class="video-placeholder">Social Proof 3</div>
-          </div>
-        </section>
-      </div>
-    </main>
+  opacity: 0;
+  pointer-events: none;
 
-    <!-- ============ HIRE ME VIEW ============ -->
-    <main class="view" id="view-hire">
-      <div class="view-inner">
-        <button
-          class="liquid-btn back-btn"
-          type="button"
-          data-target="view-home"
-        >
-          Back
-        </button>
+  /* hidden a bit above the corner */
+  transform: translate(8px, -20px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
 
-        <section class="content-block">
-          <h1 class="view-title">Hire Me</h1>
-          <p class="view-subtext">
-            Tell me what you need and I’ll help you choose the right direction.
-            Select a service, share what you’re working on, and I’ll get back
-            to you with next steps.
-          </p>
+/* after intro: tiny margin from top-left */
+.hero--interactive .hero-about-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(8px, 6px); /* << super high, just 6px below the top bar */
+}
 
-          <form
-            class="hire-form"
-            action="https://formspree.io/f/xnnlqkdl"
-            method="POST"
-          >
-            <div class="form-row">
-              <label class="form-label" for="service">Service</label>
-              <select class="form-input" name="service" id="service" required>
-                <option value="" disabled selected>
-                  Choose the service you need
-                </option>
-                <option value="Video Editing">Video Editing</option>
-                <option value="Content Creation">Content Creation</option>
-                <option value="Social Media Management">
-                  Social Media Management
-                </option>
-              </select>
-            </div>
+/* CLOUD behind SirPaul */
+.hero-cloud {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
 
-            <div class="form-row">
-              <label class="form-label" for="email">Email</label>
-              <input
-                class="form-input"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-              />
-            </div>
+/* smoother, fluffy multi-lobed cloud – no blur filter */
+.hero-cloud::before {
+  content: "";
+  width: 360px;
+  height: 210px;
+  border-radius: 999px;
 
-            <div class="form-row">
-              <label class="form-label" for="message">Message</label>
-              <textarea
-                class="form-input form-textarea"
-                id="message"
-                name="message"
-                rows="5"
-                placeholder="Tell me about your idea, what you feel, and what you’re trying to achieve. You can also share any references or links."
-                required
-              ></textarea>
-            </div>
+  /* three overlapping soft circles to mimic your PNG */
+  background:
+    radial-gradient(circle at 20% 65%, #ffffff 0%, #ffffff 55%, transparent 70%),
+    radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 65%, transparent 80%),
+    radial-gradient(circle at 80% 65%, #ffffff 0%, #ffffff 55%, transparent 70%);
 
-            <button class="liquid-btn primary" type="submit">
-              Send Request
-            </button>
-          </form>
-        </section>
-      </div>
-    </main>
+  background-repeat: no-repeat;
+  background-size: 42% 72%, 58% 100%, 42% 72%;
+  background-position: 10% 70%, 50% 38%, 90% 70%;
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-      <div class="footer-inner">
-        <p class="footer-copy">© 2025 SirPaulEntertainment</p>
-        <div class="footer-socials">
-          <a
-            href="https://www.instagram.com/sirpaulentertainment/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram - SirPaulEntertainment"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
-              alt="Instagram"
-            />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/sirpaul-54b52a350?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn - SirPaul"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
-              alt="LinkedIn"
-            />
-          </a>
-        </div>
-      </div>
-    </footer>
-  </div>
+  /* soft shadow underneath */
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.35),
+    0 0 18px rgba(255, 255, 255, 0.9);
 
-  <!-- SVG filter for liquid glass distortion -->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="0"
-    height="0"
-    style="position: absolute; overflow: hidden"
-  >
-    <defs>
-      <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.008 0.008"
-          numOctaves="2"
-          seed="92"
-          result="noise"
-        />
-        <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
-        <feDisplacementMap
-          in="SourceGraphic"
-          in2="blurred"
-          scale="65"
-          xChannelSelector="R"
-          yChannelSelector="G"
-        />
-      </filter>
-    </defs>
-  </svg>
+  filter: none;
 
-  <!-- Script -->
-  <script src="script.js" defer></script>
-</body>
-</html>
+  opacity: 0;
+  transform: translateY(8px) scale(0.9);
+  transition: opacity 450ms ease, transform 450ms ease;
+  animation: cloudFloat 7s ease-in-out infinite alternate;
+}
+
+/* cloud appears */
+.hero--cloud-visible .hero-cloud::before {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* keep it a little softer once everything has settled */
+.hero--settled .hero-cloud::before {
+  opacity: 0.9;
+}
+
+@keyframes cloudFloat {
+  0% {
+    transform: translateY(3px) scale(1);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+.hero-center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero--interactive .hero-center {
+  pointer-events: auto;
+}
+
+/* SirPaul title */
+.hero-title {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  letter-spacing: 0.12em;
+  text-transform: none; /* keep SirPaul case */
+  text-align: center;
+  text-shadow: 0 6px 14px rgba(15, 23, 42, 0.55);
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+
+.hero-title--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hero-title--top {
+  /* if you ever want to nudge it later, do it here */
+}
+
+/* subtitle */
+.hero-subtitle {
+  max-width: 360px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+.hero-subtitle-text {
+  font-family: "Montserrat", sans-serif;
+}
+
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.role-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+  margin-bottom: 22px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+@media (min-width: 640px) {
+  .role-buttons {
+    flex-direction: row;
+  }
+}
+
+.hero-cta {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+/* ============ LIQUID BUTTONS ============ */
+
+.liquid-btn {
+  position: relative;
+  border: none;
+  padding: 0.7rem 1.9rem;
+  border-radius: 999px;
+  background: transparent;
+  color: #f9fafb;
+  font-family: "Anton", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(var(--frost-blur));
+  -webkit-backdrop-filter: blur(var(--frost-blur));
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out,
+    opacity 180ms ease-out;
+  white-space: nowrap;
+}
+
+.liquid-btn::before,
+.liquid-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.liquid-btn::before {
+  background-color: rgba(var(--tint-color), var(--tint-opacity));
+  box-shadow: inset var(--shadow-offset) var(--shadow-offset)
+    var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
+}
+
+.liquid-btn::after {
+  backdrop-filter: blur(var(--frost-blur));
+  -webkit-backdrop-filter: blur(var(--frost-blur));
+  filter: url(#glass-distortion);
+  -webkit-filter: url("#glass-distortion");
+}
+
+.liquid-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.75);
+}
+
+.liquid-btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.7);
+}
+
+.liquid-btn.primary::before {
+  background: radial-gradient(
+    circle at 0% 0%,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.12)
+  );
+}
+
+/* BACK BUTTON IN SUBVIEWS */
+.back-btn {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+}
+
+/* ============ CONTENT VIEWS ============ */
+
+.view-title {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 56px;
+  margin-bottom: 14px;
+  text-shadow: 0 8px 20px rgba(15, 23, 42, 0.55);
+}
+
+.view-subtext {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  opacity: 0.94;
+  margin-bottom: 12px;
+  max-width: 640px;
+}
+
+/* video grid */
+.video-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .video-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.video-placeholder {
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-family: "Montserrat", sans-serif;
+  opacity: 0.85;
+}
+
+/* ============ HIRE FORM ============ */
+
+.hire-form {
+  margin-top: 28px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.form-input {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(15, 23, 42, 0.45);
+  color: #f9fafb;
+  outline: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.form-input::placeholder {
+  color: rgba(226, 232, 240, 0.8);
+}
+
+.form-input:focus {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* ============ FOOTER ============ */
+
+.footer {
+  width: 100%;
+  padding: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.footer-inner {
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 14px;
+}
+
+.footer-socials img {
+  width: 22px;
+  height: 22px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.5));
+}
+
+.footer-socials img:hover {
+  opacity: 1;
+  transform: translateY(-1px) scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
