@@ -102,15 +102,28 @@ body {
   }
 }
 
-/* ABOUT ME – main menu button at true top-left */
+/* ABOUT ME – main menu top-left, appears AFTER SirPaul */
 .hero-about-btn {
   position: fixed;
-  top: 8px;          /* very high */
-  left: 12px;        /* small margin from edge */
+  top: 0;
+  left: 0;
   z-index: 30;
+
+  opacity: 0;
+  pointer-events: none;
+
+  /* start just above the corner */
+  transform: translate(16px, -20px);
+  transition: opacity 350ms ease, transform 350ms ease;
 }
 
-/* no cloud anymore */
+/* when hero is interactive (after SirPaul) */
+.hero--interactive .hero-about-btn {
+  opacity: 1;
+  pointer-events: auto;
+  /* small margin from viewport edge */
+  transform: translate(16px, 10px);
+}
 
 /* hero center stack */
 .hero-center {
@@ -133,14 +146,14 @@ body {
   text-shadow: 0 6px 14px rgba(15, 23, 42, 0.55);
 
   opacity: 0;
-  transform: translateY(24px); /* start lower */
+  transform: translateY(24px);
   transition: opacity 400ms ease, transform 400ms ease;
 }
 
 /* slide up + fade in */
 .hero-title--visible {
   opacity: 1;
-  transform: translateY(-6px); /* ends slightly above center */
+  transform: translateY(-6px);
 }
 
 /* subtitle */
@@ -177,7 +190,7 @@ body {
 @media (min-width: 640px) {
   .role-buttons {
     flex-direction: row;
-    justify-content: center;
+    justify-content: center; /* center row */
   }
 }
 
@@ -187,10 +200,10 @@ body {
   transform: translateY(10px);
   transition: opacity 350ms ease, transform 350ms ease;
 
-  display: flex;           /* center the button perfectly */
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100%; /* center under the three buttons and SirPaul */
 }
 
 /* ============ LIQUID GLASS BUTTONS ============ */
@@ -417,5 +430,26 @@ body {
   .footer-inner {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+/* ============ DESKTOP TWEAKS (BIGGER TEXT/BUTTONS) ============ */
+
+@media (min-width: 900px) {
+  .hero-title {
+    font-size: 4.1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .liquid-btn {
+    font-size: 0.9rem;
+    padding: 0.85rem 2.4rem;
+  }
+
+  .view-subtext {
+    font-size: 1rem;
   }
 }
