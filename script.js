@@ -63,16 +63,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 900);
   }
 
-  // ---------- SWIPE BACK (MOBILE) ----------
+  // ---------- SWIPE BACK (MOBILE, LEFT-EDGE STYLE) ----------
   let touchStartX = 0;
   let touchStartY = 0;
   let touchStartTime = 0;
+  let swipeActive = false;
 
   document.addEventListener(
     "touchstart",
     (e) => {
       if (e.touches.length !== 1) return;
       const t = e.touches[0];
+
+      // only start tracking if the touch begins near the left edge
+      const LEFT_EDGE_LIMIT = 70; // px from the left edge
+      if (t.clientX > LEFT_EDGE_LIMIT) {
+        swipeActive = false;
+        return;
+      }
+
+      swipeActive = true;
       touchStartX = t.clientX;
       touchStartY = t.clientY;
       touchStartTime = Date.now();
@@ -83,7 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener(
     "touchend",
     (e) => {
+      if (!swipeActive) return;
+      swipeActive = false;
       if (e.changedTouches.length !== 1) return;
+
       const t = e.changedTouches[0];
       const dx = t.clientX - touchStartX;
       const dy = t.clientY - touchStartY;
@@ -92,10 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // only swipe-back when not on home
       if (currentViewId === HOME_VIEW_ID) return;
 
-      // basic swipe-right detection
-      const MIN_DISTANCE = 80; // px
-      const MAX_VERTICAL = 60; // px
-      const MAX_TIME = 600; // ms
+      // swipe-right detection
+      const MIN_DISTANCE = 80; // how far the swipe must travel
+      const MAX_VERTICAL = 60; // how much vertical movement is allowed
+      const MAX_TIME = 600; // max time in ms
 
       if (dt < MAX_TIME && dx > MIN_DISTANCE && Math.abs(dy) < MAX_VERTICAL) {
         // go back to main hero view
