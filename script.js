@@ -30,22 +30,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ---------- HERO INTRO ----------
-  // SirPaul appears, slides up, then subtitle + buttons fade in
+  // SirPaul appears first, then About Me + subtitle + buttons
   function playHeroAnimation() {
+    hero.classList.remove("hero--interactive");
+
     heroTitle.textContent = "";
     heroTitle.classList.remove("hero-title--visible");
     heroSubtitle.classList.remove("fade-in");
     roleButtons.classList.remove("fade-in");
     hireButton.classList.remove("fade-in");
 
-    // 1) show text "SirPaul"
+    // 1) SirPaul
     setTimeout(() => {
       heroTitle.textContent = "SirPaul";
       heroTitle.classList.add("hero-title--visible");
     }, 200);
 
-    // 2) fade in subtitle + buttons
+    // 2) Everything else (About Me, subtitle, buttons)
     setTimeout(() => {
+      hero.classList.add("hero--interactive"); // this shows About Me in top-left
       heroSubtitle.classList.add("fade-in");
       roleButtons.classList.add("fade-in");
       hireButton.classList.add("fade-in");
