@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ---------- VIEW SWITCHER ----------
   function showView(id) {
+  stopAllVideos(); // <-- stop videos whenever switching pages
     views.forEach((v) => v.classList.remove("view--active"));
 
     const target = document.getElementById(id);
@@ -121,3 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // initial load
   showView(HOME_VIEW_ID);
 });
+function stopAllVideos() {
+  const iframes = document.querySelectorAll("iframe");
+  iframes.forEach((iframe) => {
+    const src = iframe.src;
+    iframe.src = "";
+    iframe.src = src;
+  });
+}
+
