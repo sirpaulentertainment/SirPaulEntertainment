@@ -465,3 +465,20 @@ body {
     font-size: 1rem;
   }
 }
+/* Make YouTube overlay buttons smaller */
+.video-embed iframe {
+  pointer-events: auto !important;
+}
+
+.video-embed iframe::-webkit-media-controls-enclosure {
+  transform: scale(0.75);
+  opacity: 0.7;
+}
+
+/* Shrink YouTube branding overlay */
+.video-embed iframe + div,
+.ytp-chrome-bottom,
+.ytp-chrome-top {
+  transform: scale(0.8);
+  opacity: 0.65 !important;
+}
