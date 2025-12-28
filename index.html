@@ -378,4 +378,23 @@
 
     <script src="script.js"></script>
   </body>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("[data-target]");
+    const views = document.querySelectorAll(".view");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-target");
+
+        views.forEach(view => view.classList.remove("view--active"));
+
+        const targetView = document.getElementById(targetId);
+        if (targetView) {
+          targetView.classList.add("view--active");
+        }
+      });
+    });
+  });
+</script>
 </html>
